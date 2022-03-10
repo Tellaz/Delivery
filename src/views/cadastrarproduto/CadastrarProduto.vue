@@ -223,7 +223,7 @@ export default {
       this.itemsYear.push(i);
     }
     
-    this.defaultService = new DefaultService(this.$http, "produto");
+    this.defaultService = new DefaultService(this.$http, "api/lanche");
     if (this.$route.name == "produtoCreate") {
       this.method = "create";
       this.title = "Cadastro de Produto";
@@ -328,11 +328,11 @@ export default {
 
     async getShipByID() {
       this.produtoData.id = this.$route.params.id;
-      var shipByID = await this.defaultService.getById(this.produtoData.id);
-      this.produtoData.nome = shipByID.data.produto.nome;
-      this.produtoData.preco = shipByID.data.produto.preco;
-      this.produtoData.ingrediente = shipByID.data.produto.ingrediente;
-      this.produtoData.imagem = shipByID.data.produto.imagem;
+      var lancheByID = await this.defaultService.getById(this.produtoData.id);
+      this.produtoData.nome = lancheByID.data.nome;
+      this.produtoData.preco = lancheByID.data.preco;
+      this.produtoData.ingrediente = lancheByID.data.descricaoCurta;
+      this.produtoData.imagem = lancheByID.data.urlImagem;
      
      
     },

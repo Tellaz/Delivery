@@ -34,21 +34,22 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:item.color="{ item }">
-        <div
-          class="d-flex justify-center border-color"
-          :style="{ color: item.color, backgroundColor: item.color }"
-        >
-          {{ item.color }}
+
+      <template v-slot:item.urlImagem="{ item }">
+        <div>
+        <img class="d-flex justify-center border-color" style="max-width: 100px;" :src="item.urlImagem" alt=""> 
         </div>
       </template>
+
       <template v-slot:item.actions="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
         <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
       </template>
+
       <template v-slot:no-data>
         <div>Nenhum item cadastrado até o momento</div>
       </template>
+
     </v-data-table>
   </div>
 </template>
@@ -57,7 +58,7 @@ import DefaultService from "../../services/defaultService"
 export default {
 
     async created() {
-        this.defaultService = new DefaultService(this.$http, 'produto')
+        this.defaultService = new DefaultService(this.$http, "api/lanche")
         this.setDesserts()
     },
     data() {
@@ -67,13 +68,14 @@ export default {
             defaultService: null,
             produto: null,
             headers: [
-                { text: 'Nome', value: 'name' },
+                { text: 'Nome', value: 'nome' },
                 
                
-                { text: 'Preco', value: 'preco' },
+                { text: 'Preço', value: 'preco' },
                
-                { text: 'Ingrediente', value: 'ingrediente' },
-                { text: 'Imagem', value: 'imagem' },
+                { text: 'Ingrediente', value: 'descricaoCurta' },
+
+                { text: 'Imagem', value: 'urlImagem' },
             ],
             desserts: [
             ]
@@ -99,7 +101,7 @@ export default {
         },
 
         editItem(item) {
-            this.$router.push({ path: `ships/${item.id}/edit` })
+            this.$router.push({ path: `produto/${item.id}/edit` })
         },
 
         newItem() {
