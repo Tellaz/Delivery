@@ -24,7 +24,7 @@ export default {};
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    background-image: url(../../public/backgrounds-image.jpg);
+    background-image: url(../../public/Wood-black.jpg);
     
 }
 

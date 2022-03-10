@@ -1,6 +1,6 @@
 <template >
   <div>
-    <div class="d-flex justify-content-center titulo">Lista de Naves</div>
+    <div class="d-flex justify-content-center titulo">Lista de Produtos</div>
     <v-data-table
       :headers="headers"
       :items="desserts"
@@ -15,7 +15,7 @@
         <v-toolbar flat>
           <v-spacer></v-spacer>
           <v-btn class="mb-2 btn-gold" @click="newItem"
-            >Criar uma nova nave</v-btn
+            >Criar um novo Produto</v-btn
           >
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>

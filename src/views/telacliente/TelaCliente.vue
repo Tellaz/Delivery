@@ -32,6 +32,9 @@
             </v-card>
             </v-dialog> -->
 
+              <v-card-title class=" text-center justify-center py-1">
+                <img class="border border-5 border-dark rounded" src="../../../public/Doug.png" alt="">
+              </v-card-title>
             <v-card class="rounded-3">
               <div class="ml-5 border-color d-flex justify-content-right">
                 <div class="icon-cesta">
@@ -40,11 +43,6 @@
               
                 </div>
               </div>
-              <v-card-title class="text-center justify-center py-6">
-                <h1>
-                  Lanchonete
-                </h1>
-              </v-card-title>
 
               <v-tabs
                 v-model="tab"
@@ -281,6 +279,11 @@ img {
 .icon-cesta {
  height: 70px;
  width: 70px;
+}
+
+.titulo{
+  font-size:100px;
+  color: rgb(80, 164, 179);
 }
 
 </style>

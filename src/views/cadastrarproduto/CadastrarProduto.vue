@@ -67,6 +67,13 @@
         :disabled="inputDisable"
       ></v-text-field>
 
+      <div v-if="v$.produtoData.imagem.$error">
+        <v-alert border="bottom" color="pink darken-1" dark>
+          O campo
+          <strong>"Imagem"</strong>
+          não pode ficar vazio
+        </v-alert>
+      </div> 
       <!-- <v-file-input
         multiple
         label="Imagem produto"
@@ -82,13 +89,7 @@
           ></v-select>
         </v-col>
       </v-row>
-      <div v-if="v$.produtoData.year.$error">
-        <v-alert border="bottom" color="pink darken-1" dark>
-          O campo
-          <strong>"Ano"</strong>
-          não pode ficar vazio
-        </v-alert>
-      </div> -->
+      -->
 
       
 
