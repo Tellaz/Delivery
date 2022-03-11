@@ -23,10 +23,10 @@
                 >Deseja excluir este item?</v-card-title
               >
               <v-card-actions class="d-flex justify-content-around">
-                <v-btn class="btn-gold" text @click="deleteItemConfirm"
+                <v-btn  text @click="deleteItemConfirm"
                   >Excluir</v-btn
                 >
-                <v-btn class="btn-gold" text @click="closeDelete"
+                <v-btn text @click="closeDelete"
                   >Cancelar</v-btn
                 >
               </v-card-actions>
@@ -78,6 +78,12 @@ export default {
                 { text: 'Ingrediente', value: 'descricaoCurta' },
 
                 { text: 'Imagem', value: 'urlImagem' },
+
+                {
+                  text: "Ações",
+                  value: "actions",
+                  sortable: false,
+                },
             ],
             desserts: [
             ]

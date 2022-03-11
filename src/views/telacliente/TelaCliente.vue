@@ -37,11 +37,13 @@
               </v-card-title>
             <v-card class="rounded-3">
               <div class="ml-5 border-color d-flex justify-content-right">
-                <div class="icon-cesta">
-              
-                  <img src="../../../public/carrinho-de-compras.png" />
-              
+                <div class="d-flex justify-center icon-cesta">
+                  <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
+                    {{ cart.length }}
+                  </h3>
+                  <img  style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
                 </div>
+                  
               </div>
 
               <v-tabs
@@ -93,11 +95,14 @@
                                     <v-card-actions>
                                     
                                     <v-btn
+                                    
                                         v-if="desserts.id > 0 "
                                         class="ml-2 mt-5"
                                         outlined
                                         rounded
                                         small
+                                        @click.prevent="addCart(desserts)"
+                                        
                                     >
                                         Adicionar ao Carrinho
                                     </v-btn>
@@ -197,6 +202,7 @@ export default {
           'lanches', 'bebidas',
         ],
       }],
+      cart: [],
 
       color: '(112, 112, 112)',
       
@@ -239,6 +245,14 @@ export default {
   },
 
   methods: {
+
+    addCart(){
+      this.cart.push(this.desserts)
+    },
+
+    inCart(){
+      return this.cart.indexOf(this.desserts) != -1
+    },
 
     // async setDesserts() {
     //         var produtos = await this.defaultService.getAll()
