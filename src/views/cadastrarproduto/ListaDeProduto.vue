@@ -109,7 +109,7 @@ export default {
         },
 
         editItem(item) {
-            this.$router.push({ path: `api/lanche/v1/${item.id}` })
+            this.$router.push({ path: `lanche/v1/${item.id}` })
         },
 
         newItem() {

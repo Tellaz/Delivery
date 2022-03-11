@@ -51,7 +51,7 @@ const routes = [
     component: CadastrarProduto
   },
   {
-    path: 'api/lanche/v1/:id/',
+    path: 'lanche/v:versao/:id/',
     name: 'produtoEdit',
     component: CadastrarProduto
   },

@@ -238,6 +238,7 @@ export default {
       this.load();
       this.MethodBtn = "Salvar alterações";
       this.getProdutosByID();
+      console.log(this.lancheByID);
     }
     if (this.$route.name == "produtoRead") {
       this.method = "read";
@@ -332,7 +333,7 @@ export default {
     async getProdutosByID() {
       this.produtoData.id = this.$route.params.id;
       var lancheByID = await this.defaultService.getById(this.produtoData.id);
-      console.log(this.lancheByID);
+      
       this.produtoData.nome = lancheByID.data.nome;
       this.produtoData.preco = lancheByID.data.preco;
       this.produtoData.descricaoCurta = lancheByID.data.descricaoCurta;
