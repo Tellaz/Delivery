@@ -42,8 +42,10 @@
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-        <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+        <div class="actions-inline">
+          <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+        </div>
       </template>
 
       <template v-slot:no-data>
@@ -101,7 +103,7 @@ export default {
         },
 
         editItem(item) {
-            this.$router.push({ path: `produto/${item.id}/edit` })
+            this.$router.push({ path: `produto/1/${item.id}/edit` })
         },
 
         newItem() {

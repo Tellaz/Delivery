@@ -62,15 +62,15 @@
 
       <v-text-field
         label="Imagem"
-        v-model="produtoData.imagem"
+        v-model="produtoData.urlImagem"
         color="white"
         :disabled="inputDisable"
       ></v-text-field>
 
-      <div v-if="v$.produtoData.imagem.$error">
+      <div v-if="v$.produtoData.urlImagem.$error">
         <v-alert border="bottom" color="pink darken-1" dark>
           O campo
-          <strong>"Imagem"</strong>
+          <strong>"urlImagem"</strong>
           não pode ficar vazio
         </v-alert>
       </div> 
@@ -95,14 +95,14 @@
 
       <v-textarea
         label="Descrição"
-        v-model="produtoData.ingrediente"
+        v-model="produtoData.descricaoCurta"
         color="white"
         :disabled="inputDisable"
       ></v-textarea>
-      <div v-if="v$.produtoData.ingrediente.$error">
+      <div v-if="v$.produtoData.descricaoCurta.$error">
         <v-alert border="bottom" color="pink darken-1" dark>
           O campo
-          <strong>"Ingrediente"</strong>
+          <strong>"Descrição"</strong>
           não pode ficar vazio
         </v-alert>
       </div>
@@ -165,11 +165,14 @@ export default {
       method: "create",
       ships: [],
       produtoData: {
-        id: null,
+        id: 0,
         nome: "",
         preco: 0,
-        imagem: "",
-        ingrediente: "",
+        urlImagem: "",
+        descricaoCurta: "",
+        categoria: "string",
+        urlCapa: "string",
+        
        
       },
       
@@ -256,8 +259,8 @@ export default {
       produtoData: {
         nome: { required },
         preco: { required },
-        ingrediente: { required },
-        imagem: { required },
+        descricaoCurta: { required },
+        urlImagem: { required },
         
         
       },
@@ -273,9 +276,9 @@ export default {
       this.dialogLoaging = false;
       if (this.error) {
         this.salvarAlteraçõesLoading = false;
-        this.$router.push({ name: "listaProdutos" });
         return;
       }
+      this.$router.push({ name: "listaProdutos" });
       
      
     },
@@ -283,7 +286,7 @@ export default {
     clean() {
       this.produtoData.nome = "";
       this.produtoData.preco = 0;
-      this.produtoData.ingrediente = "";
+      this.produtoData.descricaoCurta = "";
       
       
       this.id = null;
@@ -331,8 +334,8 @@ export default {
       var lancheByID = await this.defaultService.getById(this.produtoData.id);
       this.produtoData.nome = lancheByID.data.nome;
       this.produtoData.preco = lancheByID.data.preco;
-      this.produtoData.ingrediente = lancheByID.data.descricaoCurta;
-      this.produtoData.imagem = lancheByID.data.urlImagem;
+      this.produtoData.descricaoCurta = lancheByID.data.descricaoCurta;
+      this.produtoData.urlImagem = lancheByID.data.urlImagem;
      
      
     },
@@ -348,9 +351,7 @@ export default {
    
 
     async submit() {
-      const isFormCorrect = await this.v$.$validate();
-
-      
+      const isFormCorrect = await this.v$.$validate(); 
 
       
       if (this.v$.$errors.length - this.Errors == 0) {

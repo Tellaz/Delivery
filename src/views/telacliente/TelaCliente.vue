@@ -53,7 +53,7 @@
                   v-for="item in abas"
                   :key="item"
                 >
-                  {{ item }}
+                  {{ item.name }}
                 </v-tab>
               </v-tabs>
 
@@ -71,7 +71,7 @@
                       <v-container  >
                         <v-row  dense> 
                             <v-col
-                            v-for="(produtos, i) in produtos"
+                            v-for="(desserts, i) in desserts"
                             :key="i"
                             cols="12"    
                             >
@@ -83,17 +83,17 @@
                                 <div  >
                                     <v-card-title
                                     class="text-h5"
-                                    v-text="produtos.name"
+                                    v-text="desserts.name"
                                     ></v-card-title>
 
-                                    <v-card-subtitle v-text="'R$'+produtos.preco"></v-card-subtitle>
+                                    <v-card-subtitle v-text="'R$'+desserts.preco"></v-card-subtitle>
 
-                                    <v-card-subtitle v-text="produtos.ingrediente"></v-card-subtitle>
+                                    <v-card-subtitle v-text="desserts.descricaoCurta"></v-card-subtitle>
 
                                     <v-card-actions>
                                     
                                     <v-btn
-                                        v-if="produtos.id > 0 "
+                                        v-if="desserts.id > 0 "
                                         class="ml-2 mt-5"
                                         outlined
                                         rounded
@@ -108,9 +108,9 @@
                                     class="ma-3"
                                     size="auto"
                                     tile
-                                    style="max-width: 300px;"
+                                    style="max-width: 200px;"
                                 >
-                                    <v-img :src="produtos.imagem"></v-img>
+                                    <v-img :src="desserts.urlImagem"></v-img>
                                 </v-avatar>
                                 </div>
                             </v-card>
@@ -147,8 +147,8 @@ import useVuelidate from "@vuelidate/core";
 import DefaultService from "../../services/defaultService";
 export default {
       created() {
-        this.defaultService = new DefaultService(this.$http, 'produtos')
-        this.getProdutos();
+        this.defaultService = new DefaultService(this.$http, 'api/lanche')
+        this.setDesserts();
         // this.getAbas();
     
     
@@ -184,8 +184,9 @@ export default {
     return {
 
        tab: null,
-       abas: ['lanches', 'bebidas',],
-
+       abas: [{id: 1, name:'lanches'}, {id: 2, name:'bebidas'},],
+      desserts: [
+            ],
       produtos: [{
         id: null,
         name: "",
@@ -248,14 +249,23 @@ export default {
     //         console.log(this.desserts)
     //     },
 
-    async getProdutos(){
-      this.produtos = new DefaultService(this.$http, "produto");
-      var produtos = await this.items.getAll();
-      this.items = produtos.data
-      for (let i = 0; i < this.items.length; i++) {
-        this.items.push(...this.items[i])
-      }
-    },
+    // async getProdutos(){
+    //   this.produtos = new DefaultService(this.$http, "api/lanche");
+    //   var produtos = await this.items.getAll();
+    //   this.items = produtos.data
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.items.push(...this.items[i])
+    //   }
+    // },
+
+    async setDesserts() {
+            var produtos = await this.defaultService.getAll()
+            this.produto = produtos.data
+            for (let i = 0; i < this.produto.length; i++) {
+                this.desserts.push({ ...this.produto[i] })
+            }
+            console.log(this.desserts)
+        },
 
     // getAbas(){
     //   // this.produtos = new DefaultService(this.$http, "produto");
