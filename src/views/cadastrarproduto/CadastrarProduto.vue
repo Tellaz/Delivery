@@ -237,18 +237,18 @@ export default {
       this.title = "Editando a Produto";
       this.load();
       this.MethodBtn = "Salvar alterações";
-      this.getShipByID();
+      this.getProdutosByID();
     }
     if (this.$route.name == "produtoRead") {
       this.method = "read";
       this.title = "Visualizando a Produto";
       this.inputDisable = true;
-      this.getShipByID();
+      this.getProdutosByID();
     }
     if (this.$route.name == "produtoRead") {
       this.method = "read";
       this.title = "Mostrando a Produto";
-      this.getShipByID();
+      this.getProdutosByID();
     }
   },
 
@@ -329,13 +329,16 @@ export default {
 
    
 
-    async getShipByID() {
+    async getProdutosByID() {
       this.produtoData.id = this.$route.params.id;
       var lancheByID = await this.defaultService.getById(this.produtoData.id);
+      console.log(this.lancheByID);
       this.produtoData.nome = lancheByID.data.nome;
       this.produtoData.preco = lancheByID.data.preco;
       this.produtoData.descricaoCurta = lancheByID.data.descricaoCurta;
       this.produtoData.urlImagem = lancheByID.data.urlImagem;
+      this.produtoData.categoria = lancheByID.data.categoria;
+      this.produtoData.urlCapa = lancheByID.data.urlCapa;
      
      
     },
