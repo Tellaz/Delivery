@@ -74,6 +74,15 @@
           não pode ficar vazio
         </v-alert>
       </div> 
+
+      <v-select
+          :items="abas"
+          item-text="name"
+          item-value="id"   
+          v-model="produtoData.categoria"
+          label="Categoria"
+        ></v-select>
+      
       <!-- <v-file-input
         multiple
         label="Imagem produto"
@@ -147,7 +156,7 @@ export default {
       year: null,
       
       Errors: 0,
-      
+      abas: [{id: 1, name:'Lanche'}, {id: 2, name:'Bebida'},],
       dialogOptions: {
         title: "",
         dialog: false,
@@ -170,7 +179,7 @@ export default {
         preco: 0,
         urlImagem: "",
         descricaoCurta: "",
-        categoria: "string",
+        categoria: 0,
         urlCapa: "string",
         
        
@@ -337,6 +346,7 @@ export default {
       this.produtoData.preco = lancheByID.data.preco;
       this.produtoData.descricaoCurta = lancheByID.data.descricaoCurta;
       this.produtoData.urlImagem = lancheByID.data.urlImagem;
+      this.produtoData.categoria = lancheByID.data.categoria;
      
     },
 

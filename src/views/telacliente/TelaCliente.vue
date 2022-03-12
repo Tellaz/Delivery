@@ -55,29 +55,33 @@
                 grow
               >
                 <v-tab
+                  
                   v-for="item in abas"
                   :key="item"
                 >
                   {{ item.name }}
                 </v-tab>
+                
               </v-tabs>
 
                     
               <v-tabs-items    v-model="tab">
                 <v-tab-item
-                
-                 v-for="item in abas"
-                  :key="item"
+                v-for="item in abas" 
+                :key="item"
+                :items="abas"
+                item-value="id"
+                  
                 >
                   <v-card
-                  
+                    
                     flat
                   >
                     <v-card-text >
 
                      
 
-                      <v-container   >
+                      <v-container >
                          
                         <v-row  dense> 
                             <v-col
@@ -177,6 +181,7 @@ export default {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
         this.setDesserts();
         
+        
         // this.getAbas();
     
     
@@ -221,9 +226,7 @@ export default {
         preco: 0,
         imagem: "",
         ingrediente: "",
-        abas: [
-          'lanches', 'bebidas',
-        ],
+        categoria: 0,
       }],
       cart: [],
 
