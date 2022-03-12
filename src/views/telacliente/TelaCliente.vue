@@ -68,6 +68,7 @@
               <v-tabs-items    v-model="tab">
                 <v-tab-item
                 v-for="item in abas" 
+                v-model="desserts.categoria"
                 :key="item"
                 :items="abas"
                 item-value="id"
