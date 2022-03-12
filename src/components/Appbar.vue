@@ -31,7 +31,7 @@
               <v-list-item-content>
                 <div class="d-flex justify-left">
                   
-                  <div class="remove-underline">
+                  <div >
                     
                   <font-awesome-icon :icon=" link.icone " class="mr-2"/>
                     {{ link.title }}
@@ -98,4 +98,5 @@ export default {
 .bg-hover:hover {
   background-color: #2c2929;
 }
+@import "../../src/assets/scss/index.scss";
 </style>

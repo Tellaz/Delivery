@@ -1,6 +1,6 @@
 <template >
   <div>
-    <div class="d-flex justify-content-center titulo">
+    <div >
       Lista de Tipos de Naves
     </div>
     <v-data-table

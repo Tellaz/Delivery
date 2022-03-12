@@ -6,11 +6,11 @@
                 <v-card-title class="body-style d-flex justify-center">Deseja excluir este item?</v-card-title>
                 <v-card-actions class="d-flex justify-content-around">
                     <v-btn
-                        class="btn-gold"
+                        
                         :loading="deleteLoading"
                         @click="deleteItemConfirm"
                     >Excluir</v-btn>
-                    <v-btn class="btn-gold" @click="closeDelete">Cancelar</v-btn>
+                    <v-btn @click="closeDelete">Cancelar</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>

@@ -12,7 +12,7 @@
                 <v-divider></v-divider>
                     <div class="d-flex justify-center ">
                         <v-btn
-                            class="btn-gold mb-6"
+                            class="border mb-6"
                             text
                             @click="abreModal"
                         >{{ dialogOptions.botaoText }}</v-btn>

@@ -20,6 +20,6 @@ export default class DefaultService{
         return this.$http.delete(`${this.$rota}/v${this.$versao}/${payload.id}`)
     }
     async put(payload){
-        return this.$http.put(`${this.$rota}/v${this.$versao}/${payload.id}`, {...payload})
+        return this.$http.put(`${this.$rota}/v${this.$versao}`, {...payload})
     }
 }

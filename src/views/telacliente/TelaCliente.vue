@@ -35,16 +35,19 @@
               <v-card-title class=" text-center justify-center py-1">
                 <img class="border border-5 border-dark rounded" src="../../../public/Doug.png" alt="">
               </v-card-title>
-            <v-card class="rounded-3">
-              <div class="ml-5 border-color d-flex justify-content-right">
-                <div class="d-flex justify-center icon-cesta">
-                  <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
-                    {{ cart.length }}
-                  </h3>
-                  <img  style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
+
+              
+            <v-card class="mb-5 rounded-3">
+              
+                <div class=" ml-5 border-color d-flex justify-content-right">
+                  <div class="d-flex justify-center icon-cesta">
+                    <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
+                      {{ cart.length }}
+                    </h3>
+                    <img  style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
+                  </div>
+                    
                 </div>
-                  
-              </div>
 
               <v-tabs
                 v-model="tab"
@@ -60,17 +63,22 @@
               </v-tabs>
 
                     
-              <v-tabs-items   v-model="tab">
+              <v-tabs-items    v-model="tab">
                 <v-tab-item
+                
                  v-for="item in abas"
                   :key="item"
                 >
                   <v-card
+                  
                     flat
                   >
-                    <v-card-text>
+                    <v-card-text >
 
-                      <v-container  >
+                     
+
+                      <v-container   >
+                         
                         <v-row  dense> 
                             <v-col
                             v-for="(desserts, i) in desserts"
@@ -85,27 +93,40 @@
                                 <div  >
                                     <v-card-title
                                     class="text-h5"
-                                    v-text="desserts.name"
+                                    v-text="desserts.nome"
                                     ></v-card-title>
 
                                     <v-card-subtitle v-text="'R$'+desserts.preco"></v-card-subtitle>
 
-                                    <v-card-subtitle v-text="desserts.descricaoCurta"></v-card-subtitle>
+                                    <v-card-subtitle size="auto" v-text="desserts.descricaoCurta"></v-card-subtitle>
 
                                     <v-card-actions>
                                     
                                     <v-btn
-                                    
                                         v-if="desserts.id > 0 "
                                         class="ml-2 mt-5"
                                         outlined
                                         rounded
                                         small
-                                        @click.prevent="addCart(desserts)"
-                                        
+                                        @click.prevent="addCart(product)"
                                     >
-                                        Adicionar ao Carrinho
+                                        + Carrinho
                                     </v-btn>
+                                   
+                                    </v-card-actions>
+                                    <v-card-actions>
+                                    
+                                    <v-btn
+                                        v-if="desserts.id > 0 "
+                                        class="ml-2"
+                                        outlined
+                                        rounded
+                                        small
+                                        @click.prevent="removeCart('product')"
+                                    >
+                                        - Carrinho
+                                    </v-btn>
+                                   
                                     </v-card-actions>
                                 </div>
 
@@ -123,6 +144,7 @@
                           </v-row>
                           </v-container>
 
+
                     </v-card-text>
                   </v-card>
                 </v-tab-item>
@@ -130,7 +152,7 @@
             </v-card>   
             
 
-    <div class="d-flex justify-content-center">
+    <div class="mb-4 fixed-bottom d-flex justify-content-center">
      
       <v-btn
         primary
@@ -154,6 +176,7 @@ export default {
       created() {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
         this.setDesserts();
+        
         // this.getAbas();
     
     
@@ -246,13 +269,22 @@ export default {
 
   methods: {
 
-    addCart(){
-      this.cart.push(this.desserts)
+    addCart(product){
+      this.cart.push(product)
+      console.log(this.cart);
     },
 
-    inCart(){
-      return this.cart.indexOf(this.desserts) != -1
+    inCart(product){
+      return this.cart.indexOf(product) != -1
     },
+
+    // removeCart(){
+    //  for (let index = 0; index < this.cart.length; index++) {
+       
+       
+    //  }
+     
+    // },
 
     // async setDesserts() {
     //         var produtos = await this.defaultService.getAll()
@@ -299,6 +331,9 @@ export default {
 img {
  max-width: 100%;
  max-height: 100%;
+}
+v-btn{
+  white-space: normal;
 }
 .icon-cesta {
  height: 70px;

@@ -235,10 +235,9 @@ export default {
     if (this.$route.name == "produtoEdit") {
       this.method = "edit";
       this.title = "Editando a Produto";
-      this.load();
       this.MethodBtn = "Salvar alterações";
       this.getProdutosByID();
-      console.log(this.lancheByID);
+      
     }
     if (this.$route.name == "produtoRead") {
       this.method = "read";
@@ -333,14 +332,11 @@ export default {
     async getProdutosByID() {
       this.produtoData.id = this.$route.params.id;
       var lancheByID = await this.defaultService.getById(this.produtoData.id);
-      
+
       this.produtoData.nome = lancheByID.data.nome;
       this.produtoData.preco = lancheByID.data.preco;
       this.produtoData.descricaoCurta = lancheByID.data.descricaoCurta;
       this.produtoData.urlImagem = lancheByID.data.urlImagem;
-      this.produtoData.categoria = lancheByID.data.categoria;
-      this.produtoData.urlCapa = lancheByID.data.urlCapa;
-     
      
     },
 
@@ -385,9 +381,10 @@ export default {
               return error;
             });
         } else {
+          console.log(this.produtoData);
           this.defaultService
             .put(this.produtoData)
-            .then((res) => {
+            .then(() => {
               this.dialogOptions.title = "Sucesso!";
               this.dialogOptions.message = "Item editado com sucesso!";
               this.dialogOptions.type = "success";
@@ -395,7 +392,7 @@ export default {
               this.dialogOptions.dialog = true;
               this.v$.$reset();
               this.salvarAlteraçõesLoading = false;
-              return res;
+              
             })
             .catch((error) => {
               this.dialogOptions.title = "Falha no processamento!";
