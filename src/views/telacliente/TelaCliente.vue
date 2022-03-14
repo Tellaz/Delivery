@@ -56,10 +56,9 @@
               >
                 <v-tab
                   
-                  v-for="item in abas"
-                  :key="item"
+                  
                 >
-                  {{ item.name }}
+                  cardápio
                 </v-tab>
                 
               </v-tabs>
@@ -67,15 +66,14 @@
                     
               <v-tabs-items    v-model="tab">
                 <v-tab-item
+
                 v-for="item in abas" 
-                v-model="desserts.categoria"
                 :key="item"
-                :items="abas"
-                item-value="id"
-                  
+                
+                
                 >
                   <v-card
-                    
+                   
                     flat
                   >
                     <v-card-text >
@@ -113,7 +111,7 @@
                                         outlined
                                         rounded
                                         small
-                                        @click.prevent="addCart(product)"
+                                        @click.prevent="addCart(desserts)"
                                     >
                                         + Carrinho
                                     </v-btn>
@@ -127,9 +125,10 @@
                                         outlined
                                         rounded
                                         small
-                                        @click.prevent="removeCart('product')"
+                                        v-model="desserts.id"
+                                        @click.prevent="removeCart(desserts)"
                                     >
-                                        - Carrinho
+                                        Remover
                                     </v-btn>
                                    
                                     </v-card-actions>
@@ -275,20 +274,21 @@ export default {
 
     addCart(product){
       this.cart.push(product)
-      console.log(this.cart);
+      
     },
 
     inCart(product){
       return this.cart.indexOf(product) != -1
     },
 
-    // removeCart(){
-    //  for (let index = 0; index < this.cart.length; index++) {
-       
-       
-    //  }
-     
-    // },
+    removeCart(product){
+      
+      this.cart = this.cart.filter((prod) => {
+        return product != prod
+      })
+      
+      
+    },
 
     // async setDesserts() {
     //         var produtos = await this.defaultService.getAll()
