@@ -33,18 +33,18 @@
             </v-dialog> -->
 
               <v-card-title class=" text-center justify-center py-1">
-                <img class="border border-5 border-dark rounded" src="../../../public/Doug.png" alt="">
+                <img class="border border-5 border-dark logo-site" src="../../../public/Doug.png" alt="">
               </v-card-title>
 
               
-            <v-card class="mb-5 rounded-3">
+            <v-card class="mb-5 borda-cardapio">
               
                 <div class=" ml-5 border-color d-flex justify-content-right">
                   <div class="d-flex justify-center icon-cesta">
                     <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
                       {{ cart.length }}
                     </h3>
-                    <img  style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
+                    <img class="" style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
                   </div>
                     
                 </div>
@@ -165,8 +165,6 @@
         @click="submit"
         >Finalizar Compra</v-btn>
         
-        
-
     </div>
   </div>
 </template>
@@ -180,6 +178,7 @@ export default {
       created() {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
         this.setDesserts();
+        
         
         
         // this.getAbas();
@@ -342,6 +341,14 @@ v-btn{
 .icon-cesta {
  height: 70px;
  width: 70px;
+}
+
+.logo-site{
+ border-radius: 50% ;
+}
+
+.borda-cardapio{
+ border-radius: 5% ;
 }
 
 .titulo{
