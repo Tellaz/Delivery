@@ -75,13 +75,13 @@
         </v-alert>
       </div> 
 
-      <v-select
+      <!-- <v-select
           :items="abas"
           item-text="name"
           item-value="id"   
           v-model="produtoData.categoria"
           label="Categoria"
-        ></v-select>
+        ></v-select> -->
       
       <!-- <v-file-input
         multiple
@@ -179,7 +179,7 @@ export default {
         preco: 0,
         urlImagem: "",
         descricaoCurta: "",
-        categoria: 0,
+        categoria: 1,
         urlCapa: "string",
         
        
@@ -346,7 +346,7 @@ export default {
       this.produtoData.preco = lancheByID.data.preco;
       this.produtoData.descricaoCurta = lancheByID.data.descricaoCurta;
       this.produtoData.urlImagem = lancheByID.data.urlImagem;
-      this.produtoData.categoria = lancheByID.data.categoria;
+      // this.produtoData.categoria = lancheByID.data.categoria;
      
     },
 
