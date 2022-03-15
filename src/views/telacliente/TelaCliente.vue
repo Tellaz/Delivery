@@ -154,9 +154,132 @@
                 </v-tab-item>
               </v-tabs-items>
             </v-card>   
+
+
+          <v-row class="mb-4 fixed-bottom d-flex justify-content-center" justify="center">
+            <v-dialog
+              v-model="dialog"
+              persistent
+              max-width="600px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn 
+                  
+                  max-width="200px"
+                  primary
+                  v-bind="attrs"
+                  v-on="on"
+                  class="btn-gold"
+                  @click="calcular()"
+                  > Finalizar Compra
+      
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Detalhes de entrega</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="8"
+                        style="color: red; font-size: 30px;"
+                      > Total:
+                        {{ valor }} 
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="8"
+                        style=" font-size: 15px;"
+                      >
+                        {{ ' ' + totalProdutos + ' '}} 
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="8"
+                      >
+                        <v-text-field
+                          label="Nome"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="8"
+                      > Endereço
+                        <v-text-field
+                          label="Rua"
+                          
+                          persistent-hint
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12"
+                          sm="6"
+                          md="4">---------------------------
+                        <v-text-field
+                          label="Número"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Bairro"
+                          
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                      >____________________________________
+                        <v-select
+                          :items="['Crédito', 'Débito', 'Dinheiro']"
+                          label="Forma de pagamento"
+                          required
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="12"
+                          sm="6"
+                          md="4">opcional
+                        <v-text-field
+                          label="Troco para:"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small></small>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="cancelarCompra()"
+                  >
+                    Cancelar
+                  </v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    :loading="salvarAlteraçõesLoading"
+                    @click="submit"
+                  >
+                    Comprar
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
             
 
-    <div class="mb-4 fixed-bottom d-flex justify-content-center">
+    <!-- <div >
      
       <v-btn
         primary
@@ -165,7 +288,7 @@
         @click="submit"
         >Finalizar Compra</v-btn>
         
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -178,12 +301,7 @@ export default {
       created() {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
         this.setDesserts();
-        
-        
-        
         // this.getAbas();
-    
-    
       },
   setup() {
     return { v$: useVuelidate() };
@@ -214,11 +332,13 @@ export default {
 //   },
   data() {
     return {
-
+      dialog: false,
        tab: null,
        abas: [{id: 1, name:'lanches'}, {id: 2, name:'bebidas'},],
       desserts: [
             ],
+      valor: 0,
+      totalProdutos: [],
       produtos: [{
         id: null,
         name: "",
@@ -315,6 +435,19 @@ export default {
             }
             console.log(this.desserts)
         },
+
+    async calcular(){
+      for (let index = 0; index < this.cart.length; index++) {
+          this.valor = await this.valor + this.cart[index].preco;
+          this.totalProdutos = await this.totalProdutos +' - '+ this.cart[index].nome;
+        
+      }
+    },
+
+    cancelarCompra(){
+      this.dialog = false;
+      this.valor = 0;
+    },
 
     // getAbas(){
     //   // this.produtos = new DefaultService(this.$http, "produto");
