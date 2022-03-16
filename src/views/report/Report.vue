@@ -38,6 +38,7 @@ export default {
     // this.setDesserts();
     // this.setVendas();
     this.mesclarProduto();
+    this.formatarData();
   },
 
   methods: {
@@ -85,12 +86,17 @@ export default {
               if (this.vendas[index].lanches[0].idLanche == this.produto[i].id) {
                 
                 this.pushReports.push({nome: this.produto[i].nome, preco: this.produto[i].preco, momentoVenda: this.vendas[index].momentoVenda})
+
+                let data = new Date(this.pushReports[index].momentoVenda);
+                this.pushReports[index].momentoVenda = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+                
               }
 
             }
           }
           
-        }
+        },
+
 
 
 
