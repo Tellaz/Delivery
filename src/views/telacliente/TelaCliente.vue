@@ -1,11 +1,11 @@
 <template >
   <div>
       
-            <!-- <DialogMessage
+            <DialogMessage
             :dialogOptions="dialogOptions"
             @dialog_false="callback_dialog"
             />
-            <DialogDelete
+            <!-- <DialogDelete
             :dialogDelete="dialogDelete"
             @delete_confirm="deleteItemConfirm"
             @false_dialog="closeDelete"
@@ -92,7 +92,7 @@
                                 :color="color"
                                 dark
                             >
-                                <div  class="d-flex flex-no-wrap justify-space-between">
+                                <div  class="border border-1 d-flex flex-no-wrap justify-space-between">
                                 <div  >
                                     <v-card-title
                                     class="text-h5"
@@ -140,7 +140,7 @@
                                     tile
                                     style="max-width: 200px;"
                                 >
-                                    <v-img :src="desserts.urlImagem"></v-img>
+                                    <v-img class=" border border-color" :src="desserts.urlImagem"></v-img>
                                 </v-avatar>
                                 </div>
                             </v-card>
@@ -158,11 +158,12 @@
 
           <v-row class="mb-4 fixed-bottom d-flex justify-content-center" justify="center">
             <v-dialog
+              v-if="cart.length  > 0"
               v-model="dialog"
               persistent
               max-width="600px"
             >
-              <template v-slot:activator="{ on, attrs }">
+              <template  v-slot:activator="{ on, attrs }">
                 <v-btn 
                   
                   max-width="200px"
@@ -204,6 +205,7 @@
                         md="8"
                       >
                         <v-text-field
+                          v-model="cliente.nome"
                           label="Nome"
                           required
                         ></v-text-field>
@@ -215,7 +217,7 @@
                       > Endereço
                         <v-text-field
                           label="Rua"
-                          
+                          v-model="cliente.rua"
                           persistent-hint
                           required
                         ></v-text-field>
@@ -225,13 +227,14 @@
                           md="4">---------------------------
                         <v-text-field
                           label="Número"
+                          v-model="cliente.numero"
                           required
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
                           label="Bairro"
-                          
+                          v-model="cliente.bairro"
                           required
                         ></v-text-field>
                       </v-col>
@@ -242,6 +245,7 @@
                         <v-select
                           :items="['Crédito', 'Débito', 'Dinheiro']"
                           label="Forma de pagamento"
+                          v-model="cliente.pagamento"
                           required
                         ></v-select>
                       </v-col>
@@ -250,6 +254,7 @@
                           md="4">opcional
                         <v-text-field
                           label="Troco para:"
+                          v-model="cliente.troco"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -293,7 +298,7 @@
 </template>
 <script>
 // import DialogDelete from "../../components/DialogDelete.vue";
-// import DialogMessage from "../../components/DialogMessage.vue";
+import DialogMessage from "../../components/DialogMessage.vue";
 import useVuelidate from "@vuelidate/core";
 // import { required } from "@vuelidate/validators";
 import DefaultService from "../../services/defaultService";
@@ -332,11 +337,26 @@ export default {
 //   },
   data() {
     return {
+      cliente: [{
+        nome: "",
+        rua: "",
+        numero: 0,
+        bairro: "",
+        pagamento: "",
+        troco: 0
+      }],
       dialog: false,
        tab: null,
        abas: [{id: 1, name:'lanches'}, {id: 2, name:'bebidas'},],
       desserts: [
             ],
+      dialogOptions: {
+        title: "",
+        dialog: false,
+        message: "",
+        type: "darken-2",
+        botaoText: "",
+      },
       valor: 0,
       totalProdutos: [],
       produtos: [{
@@ -356,7 +376,7 @@ export default {
     //   deleteLoading: false,
     //   salvarAlteraçõesLoading: false,
     //   inputDisable: false,
-    //   Errors: 0,
+      Errors: 0,
     //   tools: {
     //     id: null,
     //     name: "",
@@ -380,7 +400,7 @@ export default {
     };
   },
   components: {
-    // DialogMessage,
+    DialogMessage,
     // DialogDelete,
   },
   validations() {
@@ -405,8 +425,6 @@ export default {
       this.cart = this.cart.filter((prod) => {
         return product != prod
       })
-      
-      
     },
 
     // async setDesserts() {
@@ -457,6 +475,55 @@ export default {
     //     this.abas.push(...this.produtos.abas[i])
     //   }
     // },
+
+    async submit(){
+     
+        //Caso houver erros do produtotype
+        this.salvarAlteraçõesLoading = true;
+      
+      for (let index = 0; index < this.cart.length; index++) {
+
+        var venda = {
+                        id: 1,
+                        codigo: "string",
+                        idUsuario: 1,
+                        lanches:[{
+                          id: 1,
+                          codigoVenda: "string",
+                          idLanche: this.cart[index].id,
+                          quantidade: 1,
+                        }],
+                      };
+                      
+                  
+                      var vendaService =  new  DefaultService(this.$http, "api/venda");
+                        vendaService.post(venda)
+                        .then(() => {
+                        this.error = false;
+                        this.dialogOptions.title = "Sucesso!";
+                        this.dialogOptions.message = "Item cadastrado com sucesso!";
+                        this.dialogOptions.type = "success";
+                        this.dialogOptions.botaoText = "Ok";
+                         this.dialogOptions.dialog = true;
+                        
+                        this.salvarAlteraçõesLoading = false;
+                        this.v$.$reset();
+                      })
+                      .catch((error) => {
+                        this.dialogOptions.title = "Falha no processamento!";
+                        this.dialogOptions.message = "Não foi possível cadastrar a nave!";
+                        this.dialogOptions.type = "error";
+                        this.dialogOptions.botaoText = "Tente Novamente";
+                        this.dialogOptions.dialog = true;
+                        this.error = true;
+                        return error;
+                      }); 
+        
+      }
+
+      
+      
+    }
    
   },
 };

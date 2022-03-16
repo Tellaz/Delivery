@@ -68,7 +68,7 @@ export default {
         {
           title: "Relatorio",
           icone: "fa-solid fa-circle-exclamation",
-          nameRoute: "problemsList",
+          nameRoute: "relatorio",
         },
         
       ],

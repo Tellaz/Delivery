@@ -10,6 +10,9 @@ export default class DefaultService{
     async getAll(){
         return this.$http.get(`${this.$rota}/v${this.$versao}`)
     }
+    async getRelatorio(){
+        return this.$http.get(`${this.$rota}/v${this.$versao}/relatorio`)
+    }
     async getCount(){
         return this.$http.get(`${this.$rota}/count`)
     }

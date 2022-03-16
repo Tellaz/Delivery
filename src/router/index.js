@@ -6,6 +6,7 @@ import CadastrarProduto from '../views/cadastrarproduto/CadastrarProduto.vue'
 import ListaDeProduto from '../views/cadastrarproduto/ListaDeProduto.vue'
 
 import TelaCliente from '../views/telacliente/TelaCliente.vue'
+import Relatorio from '../views/report/Report.vue'
 
 
 Vue.use(VueRouter)
@@ -33,6 +34,11 @@ const routes = [
     path: '/listaprodutos',
     name: 'listaProdutos',
     component: ListaDeProduto
+  },
+  {
+    path: '/relatorio',
+    name: 'relatorio',
+    component: Relatorio
   },
   
 ]
