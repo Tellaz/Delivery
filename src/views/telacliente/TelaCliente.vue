@@ -579,7 +579,7 @@ export default {
                         .then(() => {
                         this.error = false;
                         this.dialogOptions.title = "Sucesso!";
-                        this.dialogOptions.message = "Item cadastrado com sucesso!";
+                        this.dialogOptions.message = "Seu pedido será encamihado para o WhatsApp!";
                         this.dialogOptions.type = "success";
                         this.dialogOptions.botaoText = "Ok";
                          this.dialogOptions.dialog = true;
@@ -590,7 +590,7 @@ export default {
                       })
                       .catch((error) => {
                         this.dialogOptions.title = "Falha no processamento!";
-                        this.dialogOptions.message = "Não foi possível cadastrar a nave!";
+                        this.dialogOptions.message = "Não foi possível efetuar o pedido!";
                         this.dialogOptions.type = "error";
                         this.dialogOptions.botaoText = "Tente Novamente";
                         this.dialogOptions.dialog = true;

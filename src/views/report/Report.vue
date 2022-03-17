@@ -1,15 +1,27 @@
 <template>
   <div>
-    <div class="d-flex justify-center titulo">Relatório</div>
-    <v-card elevation="5" class="p-4 mb-4"
-      v-for="(report, i) in pushReports"
-      :key="i"
-      >
+
+      <div class="d-flex justify-content-center titulo">Relatório</div>
+      <v-data-table
       
-      <div class="d-flex justify-center">
-        Pedido: {{' ' + pushReports[i].nome }}, feito: {{' ' + pushReports[i].momentoVenda }}, pelo valor de{{ ' ' + pushReports[i].preco }} reais.
-      </div>
-    </v-card>
+        :headers="headers"
+        :items="pushReports"
+        :footer-props="{
+          'items-per-page-text': 'Produtos por página:',
+          pageText: '{0}-{1} de {2}',
+        }"
+        sort-by="calories"
+        class="elevation-1"
+      >
+        
+
+
+        <template v-slot:no-data>
+          <div>Nenhum item cadastrado até o momento</div>
+        </template>
+
+      </v-data-table>
+
   </div>
 </template>
 <script>
@@ -28,8 +40,21 @@ export default {
       pushReports: [],
       vendas: [],
       pushVendas: [],
-      desserts: [],
+      
       // datas: []
+
+      headers: [
+                { text: 'Pedido', value: 'nome' },
+                
+               
+                { text: 'Data', value: 'momentoVenda' },
+               
+                { text: 'Valor', value: 'preco' },   
+
+                
+            ],
+            desserts: [
+            ]
     };
   },
 

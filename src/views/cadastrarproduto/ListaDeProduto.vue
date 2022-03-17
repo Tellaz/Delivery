@@ -5,7 +5,7 @@
       :headers="headers"
       :items="desserts"
       :footer-props="{
-        'items-per-page-text': 'Naves por página:',
+        'items-per-page-text': 'Produtos por página:',
         pageText: '{0}-{1} de {2}',
       }"
       sort-by="calories"
