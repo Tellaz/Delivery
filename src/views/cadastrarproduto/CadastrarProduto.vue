@@ -323,7 +323,7 @@ export default {
         })
         .catch((error) => {
           this.dialogOptions.title = "Falha no processamento!";
-          this.dialogOptions.message = "Não foi possível excluir a nave!";
+          this.dialogOptions.message = "Não foi possível excluir!";
           this.dialogOptions.type = "error";
           this.dialogOptions.botaoText = "Tente Novamente";
           this.dialogOptions.dialog = true;
@@ -383,7 +383,7 @@ export default {
             })
             .catch((error) => {
               this.dialogOptions.title = "Falha no processamento!";
-              this.dialogOptions.message = "Não foi possível cadastrar a nave!";
+              this.dialogOptions.message = "Não foi possível cadastrar!";
               this.dialogOptions.type = "error";
               this.dialogOptions.botaoText = "Tente Novamente";
               this.dialogOptions.dialog = true;
@@ -406,7 +406,7 @@ export default {
             })
             .catch((error) => {
               this.dialogOptions.title = "Falha no processamento!";
-              this.dialogOptions.message = "Não foi possível editar a nave!";
+              this.dialogOptions.message = "Não foi possível editar!";
               this.dialogOptions.type = "error";
               this.dialogOptions.botaoText = "Tente Novamente";
               this.dialogOptions.dialog = true;
