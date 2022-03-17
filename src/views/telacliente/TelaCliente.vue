@@ -471,7 +471,8 @@ export default {
       this.cliente.bairro +'%0DNumero:%20'+this.cliente.numero +
       '%0DForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0DTroco%20para:%20'+this.cliente.troco);
       
-     
+      this.clearInputs();
+      this.clearCart();
     },
 
     addCart(product){
@@ -534,6 +535,10 @@ export default {
 
     clearCart() {
       this.cart.pop();
+      this.valor = 0;
+      this.totalProdutos = [];
+      this.produtosTela = [];
+
     },
 
     cancelarCompra(){
@@ -583,8 +588,7 @@ export default {
                         this.dialogOptions.type = "success";
                         this.dialogOptions.botaoText = "Ok";
                          this.dialogOptions.dialog = true;
-                        this.clearInputs();
-                        this.clearCart();
+                        
                         this.salvarAlteraçõesLoading = false;
                         this.v$.$reset();
                       })
