@@ -197,7 +197,7 @@
                         md="8"
                         style=" font-size: 15px;"
                       >
-                        {{ ' ' + totalProdutos + ' '}} 
+                        {{ ' ' + produtosTela + ' '}} 
                       </v-col>
                       <v-col
                         cols="12"
@@ -210,6 +210,13 @@
                           required
                         ></v-text-field>
                       </v-col>
+                          <div v-if="v$.cliente.nome.$error">
+                            <v-alert border="bottom" color="pink darken-1" dark>
+                              O campo
+                              <strong>"nome"</strong>
+                              não pode ficar vazio
+                            </v-alert>
+                          </div>
                       <v-col
                         cols="12"
                         sm="6"
@@ -222,6 +229,13 @@
                           required
                         ></v-text-field>
                       </v-col>
+                        <div v-if="v$.cliente.rua.$error">
+                          <v-alert border="bottom" color="pink darken-1" dark>
+                            O campo
+                            <strong>"rua"</strong>
+                            não pode ficar vazio
+                          </v-alert>
+                        </div>
                       <v-col cols="12"
                           sm="6"
                           md="4">---------------------------
@@ -231,6 +245,13 @@
                           required
                         ></v-text-field>
                       </v-col>
+                        <div v-if="v$.cliente.numero.$error">
+                          <v-alert border="bottom" color="pink darken-1" dark>
+                            O campo
+                            <strong>"numero"</strong>
+                            não pode ficar vazio
+                          </v-alert>
+                        </div>
                       <v-col cols="12">
                         <v-text-field
                           label="Bairro"
@@ -238,6 +259,13 @@
                           required
                         ></v-text-field>
                       </v-col>
+                        <div v-if="v$.cliente.bairro.$error">
+                          <v-alert border="bottom" color="pink darken-1" dark>
+                            O campo
+                            <strong>"bairro"</strong>
+                            não pode ficar vazio
+                          </v-alert>
+                        </div>
                       <v-col
                         cols="12"
                         sm="6"
@@ -249,7 +277,14 @@
                           required
                         ></v-select>
                       </v-col>
-                      <v-col cols="12"
+                        <div v-if="v$.cliente.pagamento.$error">
+                          <v-alert border="bottom" color="pink darken-1" dark>
+                            O campo
+                            <strong>"pagamento"</strong>
+                            não pode ficar vazio
+                          </v-alert>
+                        </div>
+                      <v-col v-if="cliente.pagamento == 'Dinheiro'" cols="12"
                           sm="6"
                           md="4">opcional
                         <v-text-field
@@ -300,7 +335,7 @@
 // import DialogDelete from "../../components/DialogDelete.vue";
 import DialogMessage from "../../components/DialogMessage.vue";
 import useVuelidate from "@vuelidate/core";
-// import { required } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 import DefaultService from "../../services/defaultService";
 export default {
       created() {
@@ -359,6 +394,7 @@ export default {
       },
       valor: 0,
       totalProdutos: [],
+      produtosTela: [],
       produtos: [{
         id: null,
         name: "",
@@ -405,11 +441,38 @@ export default {
   },
   validations() {
     return {
-     
+      cliente: {
+        nome: { required },
+        rua: { required },
+        bairro: { required },
+        pagamento: { required },
+        numero: { required },
+        
+        
+        
+      },
     };
   },
 
   methods: {
+
+    callback_dialog() {
+      this.dialogOptions.dialog = false;
+      this.deleteLoading = false;
+      this.dialogLoaging = false;
+      this.dialog = false;
+      if (this.error) {
+        this.salvarAlteraçõesLoading = false;
+        return;
+      }
+      window.open('https://api.whatsapp.com/send?phone=5518998202291&text=Pedido%0D--------------%0D'+
+      this.totalProdutos+'%0DTotal:%20'+this.valor+'%0D%0D--------------%0DNome:%20'+this.cliente.nome
+      +'%0D--------------%0DEndereço%0D--------------%0DRua:%20'+this.cliente.rua +'%0DBairro:%20'+
+      this.cliente.bairro +'%0DNumero:%20'+this.cliente.numero +
+      '%0DForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0DTroco%20para:%20'+this.cliente.troco);
+      
+     
+    },
 
     addCart(product){
       this.cart.push(product)
@@ -457,9 +520,20 @@ export default {
     async calcular(){
       for (let index = 0; index < this.cart.length; index++) {
           this.valor = await this.valor + this.cart[index].preco;
-          this.totalProdutos = await this.totalProdutos +' - '+ this.cart[index].nome;
-        
+          this.totalProdutos = await this.totalProdutos +'%0D'+ this.cart[index].nome;
+          this.produtosTela = await this.produtosTela +' - '+ this.cart[index].nome;
+                
       }
+    },
+
+    clearInputs() {
+      Object.keys(this.cliente).forEach((key) => {
+        this.cliente[key] = "";
+      });
+    },
+
+    clearCart() {
+      this.cart.pop();
     },
 
     cancelarCompra(){
@@ -477,7 +551,11 @@ export default {
     // },
 
     async submit(){
-     
+
+         const isFormCorrect = await this.v$.$validate(); 
+
+      
+      if (this.v$.$errors.length - this.Errors == 0) {
         //Caso houver erros do produtotype
         this.salvarAlteraçõesLoading = true;
       
@@ -505,7 +583,8 @@ export default {
                         this.dialogOptions.type = "success";
                         this.dialogOptions.botaoText = "Ok";
                          this.dialogOptions.dialog = true;
-                        
+                        this.clearInputs();
+                        this.clearCart();
                         this.salvarAlteraçõesLoading = false;
                         this.v$.$reset();
                       })
@@ -521,7 +600,9 @@ export default {
         
       }
 
-      
+      }else {
+        return isFormCorrect;
+      }  
       
     }
    
