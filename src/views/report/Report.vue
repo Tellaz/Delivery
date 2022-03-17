@@ -7,7 +7,7 @@
       >
       
       <div class="d-flex justify-center">
-        Produto: {{' ' + pushReports[i].nome }}, comprado: {{' ' + pushReports[i].momentoVenda }}, pelo valor de{{ ' ' + pushReports[i].preco }}.
+        Pedido: {{' ' + pushReports[i].nome }}, feito: {{' ' + pushReports[i].momentoVenda }}, pelo valor de{{ ' ' + pushReports[i].preco }}.
       </div>
     </v-card>
   </div>
