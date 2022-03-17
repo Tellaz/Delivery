@@ -99,7 +99,7 @@
                                     v-text="desserts.nome"
                                     ></v-card-title>
 
-                                    <v-card-subtitle v-text="'R$'+desserts.preco"></v-card-subtitle>
+                                    <v-card-subtitle class="text-h6" style="color: green;" v-text="'R$'+desserts.preco"></v-card-subtitle>
 
                                     <v-card-subtitle size="auto" v-text="desserts.descricaoCurta"></v-card-subtitle>
 
