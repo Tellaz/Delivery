@@ -43,34 +43,7 @@ export default {
 
   methods: {
    
-  //  async setVendas() {
-  //           var vendaService =  new  DefaultService(this.$http, "api/venda");
-  //           var venda = await vendaService.getAll()
-  //           this.vendas = venda.data
-            
-  //           console.log(this.vendas);
-            
-  //       },
-      
-      // async setDesserts() {
-      //       var vendaService =  new  DefaultService(this.$http, "api/venda");
-             
-      //       var produtos = await vendaService.getRelatorio()
-      //       this.produto = produtos.data
-      //       for (let i = 0; i < this.produto.length; i++) {
-              
-      //           this.desserts.push({ ...this.produto[i] })
-      //       }
-      //       console.log(this.produto)
-      //   },
-
-      // async setDesserts() {
-      //       var produtos = await this.defaultService.getAll()
-      //       this.produto = produtos.data
-            
-      //       console.log(this.desserts)
-      //   },
-
+  
        async mesclarProduto(){
           var vendaService =  new  DefaultService(this.$http, "api/venda");
             var venda = await vendaService.getAll()
