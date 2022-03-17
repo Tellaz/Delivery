@@ -88,7 +88,7 @@ export default {
                 this.pushReports.push({nome: this.produto[i].nome, preco: this.produto[i].preco, momentoVenda: this.vendas[index].momentoVenda})
 
                 let data = new Date(this.pushReports[index].momentoVenda);
-                this.pushReports[index].momentoVenda = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+                this.pushReports[index].momentoVenda = data.toLocaleDateString('pt-BR')
                 
               }
 
