@@ -7,7 +7,7 @@
       >
       
       <div class="d-flex justify-center">
-        Pedido: {{' ' + pushReports[i].nome }}, feito: {{' ' + pushReports[i].momentoVenda }}, pelo valor de{{ ' ' + pushReports[i].preco }}.
+        Pedido: {{' ' + pushReports[i].nome }}, feito: {{' ' + pushReports[i].momentoVenda }}, pelo valor de{{ ' ' + pushReports[i].preco }} reais.
       </div>
     </v-card>
   </div>
