@@ -466,10 +466,10 @@ export default {
         return;
       }
       window.open('https://api.whatsapp.com/send?phone=5518998202291&text=Pedido%0D--------------%0D'+
-      this.totalProdutos+'%0DTotal:%20'+this.valor+'%0D%0D--------------%0DNome:%20'+this.cliente.nome
+      this.totalProdutos+'%0DTotal:%20'+this.valor+'%20Reais%0D%0D--------------%0DNome:%20'+this.cliente.nome
       +'%0D--------------%0DEndereço%0D--------------%0DRua:%20'+this.cliente.rua +'%0DBairro:%20'+
       this.cliente.bairro +'%0DNumero:%20'+this.cliente.numero +
-      '%0DForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0DTroco%20para:%20'+this.cliente.troco);
+      '%0DForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0DTroco%20para:%20'+this.cliente.troco+'%20Reais');
       
       this.clearInputs();
       this.clearCart();
@@ -533,11 +533,14 @@ export default {
       });
     },
 
-    clearCart() {
+    clearCart(product) {
       this.cart.pop();
       this.valor = 0;
       this.totalProdutos = [];
       this.produtosTela = [];
+      this.cart = this.cart.filter((prod) => {
+        return product != prod
+      })
 
     },
 
