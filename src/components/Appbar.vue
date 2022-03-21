@@ -48,9 +48,10 @@
 <script>
 
 export default {
-  
+
   data() {
     return {
+      
       drawer: false,
 
       links: [
@@ -74,6 +75,9 @@ export default {
       ],
     };
   },
+
+
+  
 };
 </script>
 <style  lang="scss">

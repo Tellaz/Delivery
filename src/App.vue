@@ -3,7 +3,9 @@
     <v-app>
       <div>
         <Background />
+        <div v-if="rota != 'TelaCliente'">
         <Appbar />
+        </div>
         <v-container>
           <div id="content">
             <router-view></router-view>
@@ -17,12 +19,16 @@
 import Appbar from "./components/Appbar.vue"
 import Background from "./components/Background.vue"
 export default {
+  created(){
+    this.rota = this.$route.name;
+  },
   components: {
     Appbar,
     Background,
   },
   data() {
     return {
+      rota: "",
       dialogOptions: {
         dialog: false,
         title: "Sucesso!",
@@ -38,7 +44,8 @@ export default {
     },
     openDialog() {
       this.dialogOptions.dialog = true
-    }
+    },
+    
   }
 }
 </script>

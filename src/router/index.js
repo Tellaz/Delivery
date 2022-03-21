@@ -7,6 +7,9 @@ import ListaDeProduto from '../views/cadastrarproduto/ListaDeProduto.vue'
 
 import TelaCliente from '../views/telacliente/TelaCliente.vue'
 import Relatorio from '../views/report/Report.vue'
+import Login from '../views/login/Login.vue'
+import Perfil from '../views/login/Perfil.vue'
+import Cadastro from '../views/login/Cadastro.vue'
 
 
 Vue.use(VueRouter)
@@ -17,6 +20,24 @@ const routes = [
     path: '/',
     name: 'TelaCliente',
     component: TelaCliente
+  },
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: Cadastro
+  },
+
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: Perfil
   },
   
   {
