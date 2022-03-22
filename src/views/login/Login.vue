@@ -11,14 +11,12 @@
                      <v-card-text>
                         <v-form>
                            <v-text-field
-                              
                               name="login"
                               label="Email"
                               type="email"
                            ></v-text-field>
                            <v-text-field
                               id="password"
-                              
                               name="password"
                               label="Senha"
                               type="password"
@@ -26,9 +24,7 @@
                         </v-form>
                      </v-card-text>
                      <v-card-actions class="d-flex justify-content-around">
-                        
-                        <v-btn class="btn-gold" to="/cadastro">Cadastrar</v-btn>
-                        <v-btn class="btn-gold" to="/perfil">Entrar</v-btn>
+                        <v-btn class="btn-gold" @click="submit()">Entrar</v-btn>
                      </v-card-actions>
                   </v-card>
                </v-flex>
@@ -40,10 +36,21 @@
 
 <script>
 export default {
-   name: 'Login',
-   props: {
-      source: String,
-   },
+    data() {
+        return {
+            login: [
+
+            ],
+        }
+    },
+
+    methods: {
+        submit(){
+            this.$router.push({ name: "Perfil" });
+            window.location.reload()
+        }
+    },
+   
 };
 </script>
 

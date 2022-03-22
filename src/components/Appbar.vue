@@ -56,6 +56,11 @@ export default {
 
       links: [
         {
+          title: "Perfil",
+          icone: "fa-solid fa-user",
+          nameRoute: "Perfil",
+        },
+        {
           title: "Adicionar produtos",
           icone: "fa-solid fa-circle-plus",
           nameRoute: "listaProdutos",

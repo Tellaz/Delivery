@@ -3,7 +3,7 @@
     <v-app>
       <div>
         <Background />
-        <div v-if="rota != 'TelaCliente'">
+        <div v-if="rota != 'TelaCliente' && rota != 'Login'">
         <Appbar />
         </div>
         <v-container>

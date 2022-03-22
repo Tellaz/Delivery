@@ -122,6 +122,7 @@
                                     <v-btn
                                         v-if="desserts.id > 0 "
                                         class="ml-2"
+                                        style="background-color: #6e1300; border-color: red;"
                                         outlined
                                         rounded
                                         small
@@ -341,7 +342,7 @@ export default {
       created() {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
         this.setDesserts();
-        // this.getAbas();
+        this.getNumero();
       },
   setup() {
     return { v$: useVuelidate() };
@@ -392,6 +393,7 @@ export default {
         type: "darken-2",
         botaoText: "",
       },
+      numeroTelefone: [],
       valor: 0,
       totalProdutos: [],
       produtosTela: [],
@@ -465,7 +467,7 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      window.open('https://api.whatsapp.com/send?phone=5518998202291&text=Pedido%0D--------------%0D'+
+      window.open('https://api.whatsapp.com/send?phone='+this.numeroTelefone+'&text=Pedido%0D--------------%0D'+
       this.totalProdutos+'%0DTotal:%20'+this.valor+'%20Reais%0D%0D--------------%0DNome:%20'+this.cliente.nome
       +'%0D--------------%0DEndereço%0D--------------%0DRua:%20'+this.cliente.rua +'%0DBairro:%20'+
       this.cliente.bairro +'%0DNumero:%20'+this.cliente.numero +
@@ -500,14 +502,13 @@ export default {
     //         console.log(this.desserts)
     //     },
 
-    // async getProdutos(){
-    //   this.produtos = new DefaultService(this.$http, "api/lanche");
-    //   var produtos = await this.items.getAll();
-    //   this.items = produtos.data
-    //   for (let i = 0; i < this.items.length; i++) {
-    //     this.items.push(...this.items[i])
-    //   }
-    // },
+    async getNumero(){
+      var usuarioService = new DefaultService(this.$http, "api/usuario");
+      var produtos = await usuarioService.getAll();
+      this.numeroTelefone = produtos.data[0].numeroWhats
+      console.log(this.numeroTelefone);
+      
+    },
 
     async setDesserts() {
             var produtos = await this.defaultService.getAll()
