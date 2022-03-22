@@ -1,5 +1,9 @@
 <template>
-   
+   <div>
+      <DialogMessage
+      :dialogOptions="dialogOptions"
+      @dialog_false="callback_dialog"
+      />
       <v-content>
          <v-container fluid fill-height>
             <v-layout align-center justify-center>
@@ -11,45 +15,150 @@
                      <v-card-text>
                         <v-form>
                            <v-text-field
-                              name="login"
+                              v-model="login.email"
                               label="Email"
                               type="email"
                            ></v-text-field>
+                           <div v-if="v$.login.email.$error">
+                           <v-alert border="bottom" color="pink darken-1" dark>
+                              O campo
+                              <strong>"email"</strong>
+                              não pode ficar vazio
+                           </v-alert>
+                           </div>
                            <v-text-field
-                              id="password"
-                              name="password"
+                              v-model="login.senha"
                               label="Senha"
                               type="password"
                            ></v-text-field>
+                           <div v-if="v$.login.senha.$error">
+                           <v-alert border="bottom" color="pink darken-1" dark>
+                              O campo
+                              <strong>"senha"</strong>
+                              não pode ficar vazio
+                           </v-alert>
+                           </div>
                         </v-form>
                      </v-card-text>
                      <v-card-actions class="d-flex justify-content-around">
-                        <v-btn class="btn-gold" @click="submit()">Entrar</v-btn>
+                        <v-btn class="btn-gold" :loading="salvarAlteraçõesLoading" @click="submit()">Entrar</v-btn>
                      </v-card-actions>
                   </v-card>
                </v-flex>
             </v-layout>
          </v-container>
       </v-content>
-  
+  </div>
 </template>
 
 <script>
+import DialogMessage from "../../components/DialogMessage.vue";
+import DefaultService from "../../services/defaultService";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
+   created() {
+        this.defaultService = new DefaultService(this.$http, 'api/usuario')
+        
+      },
+   setup() {
+    return { v$: useVuelidate() };
+  },
     data() {
         return {
-            login: [
-
-            ],
+           
+         requeresAuth: false,
+            
+           defaultService: null,
+           salvarAlteraçõesLoading: false,
+           dialogOptions: {
+            title: "",
+            dialog: false,
+            message: "",
+            type: "darken-2",
+            botaoText: "",
+            },
+            Errors: 0,
+           dialogLoaging: false,
+            login: {
+               email: "",
+               senha: ""
+            },
         }
     },
+
+    components: {
+    DialogMessage,
+    // DialogDelete,
+  },
+
+  validations() {
+    return {
+      login: {
+        email: { required },
+        senha: { required },
+       
+      },
+    };
+  },
 
     methods: {
-        submit(){
-            this.$router.push({ name: "Perfil" });
-            window.location.reload()
-        }
+
+       callback_dialog() {
+      this.dialogOptions.dialog = false;
+      this.deleteLoading = false;
+      this.dialogLoaging = false;
+      if (this.error) {
+        this.salvarAlteraçõesLoading = false;
+        return;
+      }
+      this.$router.push({ name: "Perfil" });
+      window.location.reload()
     },
+
+
+       async submit() {
+         
+         const isFormCorrect = await this.v$.$validate(); 
+
+         if (this.v$.$errors.length - this.Errors == 0) {
+         //Caso houver erros do produtotype
+         this.salvarAlteraçõesLoading = true;
+
+            this.defaultService
+               .login(this.login)
+               .then(() => {  
+               window.sessionStorage.setItem('token', true);
+               this.dialogOptions.title = "Sucesso!";
+               this.dialogOptions.message = "Login efetuado com sucesso!";
+               this.dialogOptions.type = "success";
+               this.dialogOptions.botaoText = "Ok";
+               this.dialogOptions.dialog = true;
+               this.error = false; 
+               this.salvarAlteraçõesLoading = false;
+               this.v$.$reset();
+
+               })
+               .catch((error) => {
+                this.dialogOptions.title = "Falha no processamento!";
+                this.dialogOptions.message = "Não foi possível efetuar o login!";
+                this.dialogOptions.type = "error";
+                this.dialogOptions.botaoText = "Tente Novamente";
+                this.dialogOptions.dialog = true;
+                this.error = true;
+                return error;
+               });
+         
+         } else {
+         return isFormCorrect;
+         }
+         
+      },
+
+        
+    },
+
+    
    
 };
 </script>

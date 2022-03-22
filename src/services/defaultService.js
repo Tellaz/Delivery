@@ -13,6 +13,9 @@ export default class DefaultService{
     async getRelatorio(){
         return this.$http.get(`${this.$rota}/v${this.$versao}/relatorio`)
     }
+    async login(payload){
+        return this.$http.post(`${this.$rota}/v${this.$versao}/login`, {...payload})
+    }
     async getCount(){
         return this.$http.get(`${this.$rota}/count`)
     }

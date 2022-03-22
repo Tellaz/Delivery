@@ -66,7 +66,7 @@ export default {
           nameRoute: "listaProdutos",
         },
           {
-            title: "Pedidos",
+            title: "Cardápio",
             icone: "fa-solid fa-burger",
             nameRoute: "TelaCliente",
             
