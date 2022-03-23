@@ -1,6 +1,69 @@
 <template>
 <div>
-  <!-- <v-card
+
+  <template>
+    <v-row justify="center">
+      <v-dialog
+        v-model="dialog"
+        persistent
+        max-width="600px"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            Open Dialog
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <v-text-field
+                    v-model="fone"
+                    label="Fone"
+                    required
+                  ></v-text-field>
+                </v-col>
+                
+              </v-row>
+            </v-container>
+            <small>*</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog = false"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+  </template>
+
+ <v-card
     max-width="375"
     class="mx-auto"
   >
@@ -11,13 +74,7 @@
     >
       <v-row class="fill-height">
         <v-card-title>
-          <v-btn
-            dark
-            icon
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-
+         
           <v-spacer></v-spacer>
 
           <v-btn
@@ -28,60 +85,20 @@
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
 
-          <v-btn
-            dark
-            icon
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
         </v-card-title>
 
         <v-spacer></v-spacer>
 
         <v-card-title class="white--text pl-12 pt-12">
-          <div class="text-h4 pl-12 pt-12">
-            {{}}
+          <div class="text-h5 pl-12 pt-12">
+           fone: +{{fone}}
           </div>
         </v-card-title>
       </v-row>
     </v-img>
 
-     <div
-      :headers="headers"
-      :items="desserts"
-      
-    >
-      <template >
-        <v-toolbar flat>
-          <v-spacer></v-spacer>
-          
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="body-style d-flex justify-center"
-                >Deseja excluir este item?</v-card-title
-              >
-              <v-card-actions class="d-flex justify-content-around">
-                <v-btn  text @click="deleteItemConfirm"
-                  >Excluir</v-btn
-                >
-                <v-btn text @click="closeDelete"
-                  >Cancelar</v-btn
-                >
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar>
-      </template>
 
-      <template v-slot:item.actions="{ item }">
-        <div class="actions-inline">
-          <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-        </div>
-      </template>
-      
-    </div>
-    </v-card> -->
+    </v-card>
 </div>
 </template>
 
@@ -92,8 +109,11 @@ export default {
 //     created(){
         
 //     },
-//     data() {
-//         return {
+  data() {
+       return {
+              fone: "5518991971208",
+              dialog: false,
+
 //         dialogDelete: false,
 //             itemToBeDeleted: null,
 //             defaultService: null,
@@ -110,10 +130,10 @@ export default {
 //             ],
 //             desserts: [
 //             ]
-//         }
-//     },
+              }
+        },
 
-//     methods: {
+     methods: {
 //         editItem (item) {
 //         this.editedIndex = this.desserts.indexOf(item)
 //         this.editedItem = Object.assign({}, item)
@@ -155,7 +175,7 @@ export default {
 //         }
 //         this.close()
 //       },
-//     }
+     }
    
 };
 </script>
