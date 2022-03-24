@@ -49,11 +49,15 @@
 
 export default {
 
+  created(){
+    this.rota = this.$route.name;
+  },
+
   data() {
     return {
       
       drawer: false,
-
+      rota: "",
       links: [
         {
           title: "Perfil",
