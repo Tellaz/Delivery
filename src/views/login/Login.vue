@@ -89,7 +89,6 @@ export default {
 
     components: {
     DialogMessage,
-    // DialogDelete,
   },
 
   validations() {
@@ -113,7 +112,7 @@ export default {
         return;
       }
       this.$router.push({ name: "Perfil" });
-      //window.location.reload()
+      window.location.reload()
     },
 
 
