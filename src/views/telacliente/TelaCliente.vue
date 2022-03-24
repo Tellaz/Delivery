@@ -493,20 +493,12 @@ export default {
       })
     },
 
-    // async setDesserts() {
-    //         var produtos = await this.defaultService.getAll()
-    //         this.items = produtos.data
-    //         for (let i = 0; i < this.items.length; i++) {
-    //             this.desserts.push({ ...this.items[i] })
-    //         }
-    //         console.log(this.desserts)
-    //     },
 
     async getNumero(){
       var usuarioService = new DefaultService(this.$http, "api/usuario");
       var produtos = await usuarioService.getAll();
       this.numeroTelefone = produtos.data[0].numeroWhats
-      console.log(this.numeroTelefone);
+     
       
     },
 
@@ -516,7 +508,7 @@ export default {
             for (let i = 0; i < this.produto.length; i++) {
                 this.desserts.push({ ...this.produto[i] })
             }
-            console.log(this.desserts)
+           
         },
 
     async calcular(){
