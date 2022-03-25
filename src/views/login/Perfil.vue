@@ -1,5 +1,9 @@
 <template>
 <div>
+   <DialogMessage
+            :dialogOptions="dialogOptions"
+            @dialog_false="callback_dialog"
+            />
 
   <template>
     <v-row justify="center">
@@ -8,16 +12,7 @@
         persistent
         max-width="600px"
       >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="primary"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >
-            Open Dialog
-          </v-btn>
-        </template>
+        
         <v-card>
           <v-card-title>
             <span class="text-h5">User Profile</span>
@@ -39,7 +34,7 @@
                 
               </v-row>
             </v-container>
-            <small>*</small>
+           
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -53,7 +48,7 @@
             <v-btn
               color="blue darken-1"
               text
-              @click="dialog = false"
+              @click="submit()"
             >
               Save
             </v-btn>
@@ -65,54 +60,76 @@
 
  <v-card
     max-width="375"
-    class="mx-auto"
+    class="mt-10 mx-auto"
   >
     <v-img
       src="https://filestore.community.support.microsoft.com/api/images/6061bd47-2818-4f2b-b04a-5a9ddb6f6467?upload=true"
       height="300px"
       dark
     >
-      <v-row class="fill-height">
-        <v-card-title>
+      <v-row  class="fill-height">
          
-          <v-spacer></v-spacer>
-
-          <v-btn
-            dark
-            icon
-            class="mr-4"
-          >
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
+        <v-card-title>
+     
+           
 
         </v-card-title>
 
         <v-spacer></v-spacer>
-
-        <v-card-title class="white--text pl-12 pt-12">
-          <div class="text-h5 pl-12 pt-12">
-           fone: +{{fone}}
-          </div>
-        </v-card-title>
+        
       </v-row>
     </v-img>
 
 
+        <v-text-field
+
+          label="Numero"
+          v-model="fone"
+          persistent-hint
+          disabled
+        ></v-text-field>
+        <div v-if="v$.fone.$error">
+          <v-alert border="bottom" color="pink darken-1" dark>
+            O campo
+            <strong>"fone"</strong>
+            não pode ficar vazio
+          </v-alert>
+        </div>
+        <div class="d-flex justify-content-center">
+        <v-btn small class="btn-gold mb-3 mr-2" @click="editItem()">Editar</v-btn>
+        </div>
     </v-card>
 </div>
 </template>
 
 <script>
-    
-
+import DefaultService from "../../services/defaultService";  
+import DialogMessage from "../../components/DialogMessage.vue";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
-//     created(){
-        
-//     },
+    created(){
+        this.getNumero();
+    },
+    setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
        return {
-              fone: "5518991971208",
+              fone: "",
+              Errors: 0,
+              id: 0,
               dialog: false,
+              usuario:[],
+              salvarNum: [],
+              usuarioFone: [],
+              dialogOptions: {
+              title: "",
+              dialog: false,
+              message: "",
+              type: "darken-2",
+              botaoText: "",
+            },
 
 //         dialogDelete: false,
 //             itemToBeDeleted: null,
@@ -133,13 +150,89 @@ export default {
               }
         },
 
-     methods: {
-//         editItem (item) {
-//         this.editedIndex = this.desserts.indexOf(item)
-//         this.editedItem = Object.assign({}, item)
-//         this.dialog = true
-//       },
+    components: {
+      DialogMessage,
+      // DialogDelete,
+    },
 
+    validations() {
+    return {   
+        fone: { required },
+    };
+  },
+
+    methods: {
+
+      callback_dialog() {
+        this.dialogOptions.dialog = false;
+        this.deleteLoading = false;
+        this.dialogLoaging = false;
+        this.dialog = false;
+        if (this.error) {
+          this.salvarAlteraçõesLoading = false;
+          return;
+        }
+
+      },
+
+      async getNumero(){
+      var usuarioService = new DefaultService(this.$http, "api/usuario");
+      this.usuario = await usuarioService.getAll();
+      this.fone = this.usuario.data[0].numeroWhats
+      this.id = this.usuario.data[0].id
+        for (let index = 0; index < this.usuario.data.length; index++) {
+          if (this.id == this.usuario.data[index].id) {
+            this.usuarioFone.push({...this.usuario.data[index]})
+            this.salvarNum = this.usuarioFone[0]
+          }
+          
+        }
+        
+      },
+
+      editItem () {
+        
+        this.dialog = true
+      },
+
+      async submit(){
+         const isFormCorrect = await this.v$.$validate();
+
+
+         if (this.v$.$errors.length - this.Errors == 0) {
+        //Caso houver erros do produtotype
+        this.salvarAlteraçõesLoading = true;
+        
+        this.salvarNum.numeroWhats = this.fone;
+
+        var usuarioService = new DefaultService(this.$http, "api/usuario");
+        usuarioService
+            .put(this.salvarNum)
+            .then(() => {
+              this.dialogOptions.title = "Sucesso!";
+              this.dialogOptions.message = "Item editado com sucesso!";
+              this.dialogOptions.type = "success";
+              this.dialogOptions.botaoText = "Ok";
+              this.dialogOptions.dialog = true;
+              this.v$.$reset();
+              this.salvarAlteraçõesLoading = false;
+              
+            })
+            .catch((error) => {
+              this.dialogOptions.title = "Falha no processamento!";
+              this.dialogOptions.message = "Não foi possível editar!";
+              this.dialogOptions.type = "error";
+              this.dialogOptions.botaoText = "Tente Novamente";
+              this.dialogOptions.dialog = true;
+              this.error = true;
+              return error;
+            });
+
+          }else {
+          return isFormCorrect;
+        }
+
+      }
 //       deleteItem (item) {
 //         this.editedIndex = this.desserts.indexOf(item)
 //         this.editedItem = Object.assign({}, item)

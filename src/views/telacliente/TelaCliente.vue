@@ -491,6 +491,8 @@ export default {
       this.cart = this.cart.filter((prod) => {
         return product != prod
       })
+      
+      
     },
 
 
@@ -540,6 +542,8 @@ export default {
     cancelarCompra(){
       this.dialog = false;
       this.valor = 0;
+      this.clearInputs();
+      this.clearCart();
     },
 
     // getAbas(){
@@ -553,7 +557,7 @@ export default {
 
     async submit(){
 
-         const isFormCorrect = await this.v$.$validate(); 
+    const isFormCorrect = await this.v$.$validate(); 
 
       
       if (this.v$.$errors.length - this.Errors == 0) {
