@@ -6,9 +6,11 @@
       
         :headers="headers"
         :items="pushReports"
+        
         :footer-props="{
-          'items-per-page-text': 'Produtos por página:',
-          pageText: '{0}-{1} de {2}',
+          
+          'items-per-page-text': 'compra por página:',
+          pageText: '{0}-{1} de {2}', 
         }"
         sort-by="calories"
         class="elevation-1"
@@ -17,7 +19,7 @@
 
 
         <template v-slot:no-data>
-          <div>Nenhum item cadastrado até o momento</div>
+          <div>Nenhuma compra até o momento</div>
         </template>
 
       </v-data-table>
@@ -36,6 +38,7 @@ export default {
           data: "",
           valor: 0
       },
+      total: 0,
       produtos: [],
       pushReports: [],
       vendas: [],
@@ -68,9 +71,13 @@ export default {
 
   methods: {
 
-
+      async totalValor(){
+          var vendaService =  new  DefaultService(this.$http, "api/venda");
+            var venda = await vendaService.getAll()
+            this.vendas = venda.data
+      },
     
-   
+
   
        async mesclarProduto(){
           var vendaService =  new  DefaultService(this.$http, "api/venda");
@@ -86,11 +93,14 @@ export default {
               
               if (this.vendas[index].lanches[0].idLanche == this.produto[i].id) {
                 
+                let data = new Date(this.vendas[index].momentoVenda);
+                
+                
+                this.vendas[index].momentoVenda = data.toLocaleDateString('pt-BR')
+
                 this.pushReports.push({nome: this.produto[i].nome, preco: this.produto[i].preco, momentoVenda: this.vendas[index].momentoVenda})
 
-                let data = new Date(this.pushReports[index].momentoVenda);
-                this.pushReports[index].momentoVenda = data.toLocaleDateString('pt-BR')
-                
+   
               }
 
             }

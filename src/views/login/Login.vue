@@ -3,6 +3,7 @@
       <DialogMessage
       :dialogOptions="dialogOptions"
       @dialog_false="callback_dialog"
+      
       />
       <v-content>
          <v-container fluid fill-height>
@@ -14,7 +15,7 @@
                      </v-toolbar>
                      <v-card-text>
                         <v-form>
-                           <v-text-field
+                           <v-text-field 
                               v-model="login.email"
                               label="Email"
                               type="email"
@@ -27,6 +28,7 @@
                            </v-alert>
                            </div>
                            <v-text-field
+                           @keyup.enter="submit()"
                               v-model="login.senha"
                               label="Senha"
                               type="password"
@@ -44,6 +46,7 @@
                         <v-btn class="btn-gold" :loading="salvarAlteraçõesLoading" @click="submit()">Entrar</v-btn>
                      </v-card-actions>
                   </v-card>
+                        
                </v-flex>
             </v-layout>
          </v-container>
