@@ -500,7 +500,6 @@ export default {
       var numberService = new DefaultService(this.$http, "api/number");
       var numero = await numberService.getAll();
       this.numeroTelefone = numero.data
-      console.log(this.numeroTelefone);
       
     },
 
