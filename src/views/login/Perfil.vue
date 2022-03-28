@@ -58,47 +58,79 @@
     </v-row>
   </template>
 
- <v-card
-    max-width="375"
-    class="mt-10 mx-auto"
-  >
-    <v-img
-      src="https://filestore.community.support.microsoft.com/api/images/6061bd47-2818-4f2b-b04a-5a9ddb6f6467?upload=true"
-      height="300px"
-      dark
-    >
-      <v-row  class="fill-height">
-         
-        <v-card-title>
-     
-           
+    <template>
+      <v-item-group >
+        <v-container >
+          <v-row>
+            <v-col
+              
+              class="d-flex justify-content-around"
+              cols="12"
+              md="12"
+            >
+              
+                  <v-card
+                    max-width="375"
+                    class="mt-10 "
+                  >
+                    <v-img
+                      src="https://filestore.community.support.microsoft.com/api/images/6061bd47-2818-4f2b-b04a-5a9ddb6f6467?upload=true"
+                      height="300px"
+                      dark
+                    >
+                      <v-row  class="fill-height">
+                        
+                        <v-card-title>
+                    
+                          
 
-        </v-card-title>
+                        </v-card-title>
 
-        <v-spacer></v-spacer>
-        
-      </v-row>
-    </v-img>
+                        <v-spacer></v-spacer>
+                        
+                      </v-row>
+                    </v-img>
 
 
-        <v-text-field
+                        <v-text-field
 
-          label="Numero"
-          v-model="fone"
-          persistent-hint
-          disabled
-        ></v-text-field>
-        <div v-if="v$.fone.$error">
-          <v-alert border="bottom" color="pink darken-1" dark>
-            O campo
-            <strong>"fone"</strong>
-            não pode ficar vazio
-          </v-alert>
-        </div>
-        <div class="d-flex justify-content-center">
-        <v-btn small class="btn-gold mb-3 mr-2" @click="editItem()">Editar</v-btn>
-        </div>
-    </v-card>
+                          label="Numero"
+                          v-model="fone"
+                          persistent-hint
+                          disabled
+                        ></v-text-field>
+                        <div v-if="v$.fone.$error">
+                          <v-alert border="bottom" color="pink darken-1" dark>
+                            O campo
+                            <strong>"fone"</strong>
+                            não pode ficar vazio
+                          </v-alert>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                        <v-btn small class="btn-gold mb-3 mr-2" @click="editItem()">Editar</v-btn>
+                        
+                        </div>
+                  </v-card>
+                  <v-card
+                    width="375"
+                    class="mt-10"
+                  >
+                    
+                        <div class="d-flex justify-content-center">
+                        <v-btn small class="btn-gold " @click="editItem()">Cadastrar Novo ADM</v-btn>
+                        </div>
+                        
+                        <hr>
+                  </v-card>
+                
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>
+    </template>
+
+          
+    
 </div>
 </template>
 
