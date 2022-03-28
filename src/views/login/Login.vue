@@ -129,8 +129,8 @@ export default {
 
             this.defaultService
                .login(this.login)
-               .then(() => {  
-               window.sessionStorage.setItem('token', true);
+               .then((res) => {  
+               window.sessionStorage.setItem('tokens', true);
                this.dialogOptions.title = "Sucesso!";
                this.dialogOptions.message = "Login efetuado com sucesso!";
                this.dialogOptions.type = "success";
@@ -139,7 +139,7 @@ export default {
                this.error = false; 
                this.salvarAlteraçõesLoading = false;
                this.v$.$reset();
-
+               localStorage.setItem('token', res.data.token)
                })
                .catch((error) => {
                 this.dialogOptions.title = "Falha no processamento!";
@@ -150,6 +150,8 @@ export default {
                 this.error = true;
                 return error;
                });
+
+               
          
          } else {
          return isFormCorrect;

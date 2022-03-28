@@ -1,6 +1,6 @@
 export default (to, from, next) => {
 
-    if (to.meta.authenticated && sessionStorage.getItem('token')) 
+    if (to.meta.authenticated && sessionStorage.getItem('tokens')) 
     {
         
         return next();

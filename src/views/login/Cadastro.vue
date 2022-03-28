@@ -65,12 +65,27 @@
 
             <v-text-field
                 id="password"
-                v-model="usuarioData.password"
+                v-model="usuarioData.senha"
                 name="password"
                 label="Senha"
                 type="password"
             ></v-text-field>
-            <div v-if="v$.usuarioData.password.$error">
+            <div v-if="v$.usuarioData.senha.$error">
+                <v-alert border="bottom" color="pink darken-1" dark>
+                O campo
+                <strong>"Senha"</strong>
+                não pode ficar vazio
+                </v-alert>
+            </div>
+
+        <v-text-field
+            id="password"
+            v-model="usuarioData.confirmarSenha"
+            name="password"
+            label="Confirmar Senha"
+            type="password"
+        ></v-text-field>
+        <div v-if="v$.usuarioData.confirmarSenha.$error">
             <v-alert border="bottom" color="pink darken-1" dark>
             O campo
             <strong>"Senha"</strong>
@@ -78,17 +93,8 @@
             </v-alert>
         </div>
 
-        <v-text-field
-            id="password"
-            
-            name="password"
-            label="Confirmar Senha"
-            type="password"
-        ></v-text-field>
-
         
-
-        
+         
 
         <div class="d-flex justify-content-around">
             <v-btn
@@ -154,7 +160,9 @@ export default {
         id: 0,
         nome: "",
         email: "",
-        password: "",
+        senha: "",
+        confirmarSenha: "",
+        role: "admin",
        
         
        
@@ -210,7 +218,7 @@ export default {
       this.itemsYear.push(i);
     }
     
-    this.defaultService = new DefaultService(this.$http, "api/lanche");
+    this.defaultService = new DefaultService(this.$http, "api/usuario");
     if (this.$route.name == "Cadastro") {
       this.method = "create";
       this.title = "Cadastro de Admin";
@@ -243,8 +251,8 @@ export default {
       usuarioData: {
         nome: { required },
         email: { required },
-        password: { required },     
-        
+        senha: { required },     
+        confirmarSenha: { required },  
         
         
         
@@ -263,19 +271,12 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      this.$router.push({ name: "listaProdutos" });
+      this.$router.push({ name: "perfil" });
       
      
     },
 
-    clean() {
-      this.usuarioData.nome = "";
-      this.usuarioData.preco = 0;
-      this.usuarioData.descricaoCurta = "";
-      
-      
-      this.id = null;
-    },
+    
     
     closeDelete() {
       this.dialogDelete.dialog = false;
@@ -345,7 +346,7 @@ export default {
         this.salvarAlteraçõesLoading = true;
         if (this.method == "create") {
           this.defaultService
-            .post(this.usuarioData)
+            .cadastro(this.usuarioData)
             .then(() => {
               this.error = false;
               this.dialogOptions.title = "Sucesso!";

@@ -18,9 +18,13 @@
 <script>
 import Appbar from "./components/Appbar.vue"
 import Background from "./components/Background.vue"
+//import axios from 'axios'
 export default {
-  created(){
+  async created(){
     this.rota = this.$route.name;
+   // const res = await axios.get('api/usuario/v1');
+   // console.log(res);
+
   },
   components: {
     Appbar,
