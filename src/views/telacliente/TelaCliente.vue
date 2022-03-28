@@ -497,10 +497,10 @@ export default {
 
 
     async getNumero(){
-      var usuarioService = new DefaultService(this.$http, "api/usuario");
-      var produtos = await usuarioService.getAll();
-      this.numeroTelefone = produtos.data[0].numeroWhats
-     
+      var numberService = new DefaultService(this.$http, "api/number");
+      var numero = await numberService.getAll();
+      this.numeroTelefone = numero.data
+      console.log(this.numeroTelefone);
       
     },
 
