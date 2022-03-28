@@ -81,6 +81,16 @@
                      
 
                       <v-container >
+                        <div class="d-flex justify-content-center">
+
+                        <v-progress-circular
+                          
+                          v-if="load"
+                          :size="50"
+                          color="white"
+                          indeterminate
+                        ></v-progress-circular>
+                        </div>
                          
                         <v-row  dense> 
                             <v-col
@@ -373,6 +383,7 @@ export default {
 //   },
   data() {
     return {
+      load: false,
       cliente: [{
         nome: "",
         rua: "",
@@ -504,12 +515,13 @@ export default {
     },
 
     async setDesserts() {
+            this.load = true
             var produtos = await this.defaultService.getAll()
             this.produto = produtos.data
             for (let i = 0; i < this.produto.length; i++) {
                 this.desserts.push({ ...this.produto[i] })
             }
-           
+           this.load = false
         },
 
     async calcular(){

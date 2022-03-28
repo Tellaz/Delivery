@@ -2,6 +2,7 @@
   <div>
 
       <div class="d-flex justify-content-center titulo">Relatório</div>
+          
       <v-data-table
       
         :headers="headers"
@@ -15,11 +16,14 @@
         sort-by="calories"
         class="elevation-1"
       >
-        
-
-
         <template v-slot:no-data>
-          <div>Nenhuma compra até o momento</div>
+          <v-progress-circular
+            v-if="load"
+            :size="50"
+            color="white"
+            indeterminate
+          ></v-progress-circular>
+          <div v-if="load == false">Nenhuma compra até o momento</div>
         </template>
 
       </v-data-table>
@@ -32,6 +36,7 @@ export default {
   
   data() {
     return {
+      load: false,
       reports: {
           id: 0,
           nome: "",
@@ -71,21 +76,23 @@ export default {
 
   methods: {
 
-      async totalValor(){
-          var vendaService =  new  DefaultService(this.$http, "api/venda");
-            var venda = await vendaService.getAll()
-            this.vendas = venda.data
-      },
+      // async totalValor(){
+      //     var vendaService =  new  DefaultService(this.$http, "api/venda");
+      //       var venda = await vendaService.getAll()
+      //       this.vendas = venda.data
+            
+      // },
     
 
   
        async mesclarProduto(){
+          this.load = true
           var vendaService =  new  DefaultService(this.$http, "api/venda");
-            var venda = await vendaService.getAll()
-            this.vendas = venda.data
+          var venda = await vendaService.getAll()
+          this.vendas = venda.data
 
-            var produtos = await this.defaultService.getAll()
-            this.produto = produtos.data
+          var produtos = await this.defaultService.getAll()
+          this.produto = produtos.data
 
           for (let index = 0; index < this.vendas.length; index++) {
               console.log(this.vendas[index]);
@@ -105,6 +112,7 @@ export default {
 
             }
           }
+          this.load = false
           
         },
 
@@ -116,5 +124,10 @@ export default {
 };
 </script>
 <style lang="scss">
+
+.v-progress-circular {
+  margin: 1rem;
+}
+
 @import "../../../src/assets/scss/index.scss";
 </style>
