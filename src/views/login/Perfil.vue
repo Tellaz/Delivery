@@ -117,7 +117,7 @@
                   >
                     
                         <div class="d-flex justify-content-center">
-                        <v-btn small class="btn-gold " @click="editItem()">Cadastrar Novo ADM</v-btn>
+                        <v-btn small class="btn-gold " @click="cadastrarADM()">Cadastrar Novo ADM</v-btn>
                         </div>
                         
                         <hr>
@@ -220,6 +220,10 @@ export default {
           
         }
         
+      },
+
+      cadastrarADM(){
+        this.$router.push({ path: `cadastro` })
       },
 
       editItem () {
