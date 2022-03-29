@@ -32,7 +32,7 @@
             </v-card>
             </v-dialog> -->
               
-              <v-card-title  class="margin-logo py-1">
+              <v-card-title  class="d-flex justify-content-center py-1">
                 <img  class=" border-5 border-dark logo-site" src="../../../public/Dico.png" alt="">
               </v-card-title>
 
