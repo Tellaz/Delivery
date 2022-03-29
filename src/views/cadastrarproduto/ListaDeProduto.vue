@@ -77,6 +77,8 @@ export default {
                
                 { text: 'Ingrediente', value: 'descricaoCurta' },
 
+                { text: 'Categoria', value: 'categoria' },
+
                 { text: 'Imagem', value: 'urlImagem' },
 
                 {

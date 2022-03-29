@@ -70,7 +70,7 @@
       <div v-if="v$.produtoData.urlImagem.$error">
         <v-alert border="bottom" color="pink darken-1" dark>
           O campo
-          <strong>"urlImagem"</strong>
+          <strong>"Imagem"</strong>
           não pode ficar vazio
         </v-alert>
       </div> 
@@ -82,6 +82,13 @@
           v-model="produtoData.categoria"
           label="Categoria"
         ></v-select>
+        <div v-if="v$.produtoData.categoria.$error">
+        <v-alert border="bottom" color="pink darken-1" dark>
+          O campo
+          <strong>"categoria"</strong>
+          não pode ficar vazio
+        </v-alert>
+      </div> 
       
       <!-- <v-file-input
         multiple
@@ -270,7 +277,7 @@ export default {
         preco: { required },
         descricaoCurta: { required },
         urlImagem: { required },
-        
+        categoria: { required }
         
       },
     };
