@@ -97,7 +97,7 @@
                                 <div  class="border border-1 d-flex flex-no-wrap justify-space-between">
                                 <div  >
                                     <v-card-title
-                                    class="text-h5"
+                                    class="nomeSemQuebra text-h6"
                                     v-text="desserts.nome"
                                     ></v-card-title>
 
@@ -191,7 +191,7 @@
                                 <div  class="border border-1 d-flex flex-no-wrap justify-space-between">
                                 <div  >
                                     <v-card-title
-                                    class="text-h5"
+                                    class="nomeSemQuebra text-h5"
                                     v-text="dessertsBebidas.nome"
                                     ></v-card-title>
 
@@ -728,6 +728,11 @@ img {
 v-btn{
   white-space: normal;
 }
+
+.nomeSemQuebra{
+ white-space: nowrap !important;
+}
+
 .icon-cesta {
  height: 70px;
  width: 70px;
