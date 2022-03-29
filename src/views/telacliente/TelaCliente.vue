@@ -31,13 +31,13 @@
                 </center>
             </v-card>
             </v-dialog> -->
-
-              <v-card-title class=" text-center justify-center py-1">
-                <img class="border border-5 border-dark logo-site" src="../../../public/Doug.png" alt="">
+              
+              <v-card-title  class="margin-logo py-1">
+                <img  class=" border-5 border-dark logo-site" src="../../../public/Dico.png" alt="">
               </v-card-title>
 
               
-            <v-card class="mb-5 borda-cardapio">
+            <v-card class=" mb-5 borda-cardapio">
               
                 <div class=" ml-5 border-color d-flex justify-content-right">
                   <div class="d-flex justify-center icon-cesta">
@@ -739,11 +739,23 @@ v-btn{
 }
 
 .logo-site{
- border-radius: 50% ;
+ border-radius: 0px 0px 50px 50px ;
+ margin-top: -15px;
+ 
+ 
+ 
 }
 
+.margin-logo{
+  
+  margin-right: 110px;
+}
 .borda-cardapio{
  border-radius: 5% ;
+}
+
+.marginCard{
+  border-top: none;
 }
 
 .titulo{

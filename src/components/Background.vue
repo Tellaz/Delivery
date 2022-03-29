@@ -18,7 +18,7 @@ export default {};
 
 .fundo {
     z-index: 1;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     width: 100%;
