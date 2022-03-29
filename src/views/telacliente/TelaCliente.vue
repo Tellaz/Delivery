@@ -621,7 +621,7 @@ export default {
     async calcular(){
       for (let index = 0; index < this.cart.length; index++) {
           this.valor = await this.valor + this.cart[index].preco;
-          this.totalProdutos = await this.totalProdutos +'%0D'+ this.cart[index].nome;
+          this.totalProdutos = await this.totalProdutos +'%0A'+ this.cart[index].nome;
           this.produtosTela = await this.produtosTela +' - '+ this.cart[index].nome;
                 
       }
