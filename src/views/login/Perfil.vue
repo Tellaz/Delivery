@@ -5,29 +5,28 @@
             @dialog_false="callback_dialog"
             />
 
-  <template>
-    <v-row justify="center">
-      <v-dialog
+  <template  >
+    <v-row >
+      <v-dialog 
         v-model="dialog"
         persistent
         max-width="600px"
       >
         
-        <v-card>
-          <v-card-title>
-            <span class="text-h5">User Profile</span>
+        <v-card  >
+          <v-card-title class="d-flex justify-content-center">
+            <span class="text-h5">Editar Contato</span>
           </v-card-title>
           <v-card-text>
-            <v-container>
-              <v-row>
+            <v-container >
+              <v-row class="d-flex justify-content-center" >
                 <v-col
                   cols="12"
-                  sm="6"
-                  md="4"
                 >
                   <v-text-field
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                     v-model="fone"
-                    label="Fone"
+                    label="Numero"
                     required
                   ></v-text-field>
                 </v-col>
@@ -36,23 +35,26 @@
             </v-container>
            
           </v-card-text>
-          <v-card-actions>
+          <div class="d-flex justify-content-center">
+
+          <v-card-actions  >
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="white darken-1"
               text
-              @click="dialog = false"
+              @click="fecharDialog()"
             >
-              Close
+              Cancelar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="white darken-1"
               text
               @click="submit()"
             >
-              Save
+              Salvar
             </v-btn>
           </v-card-actions>
+          </div>
         </v-card>
       </v-dialog>
     </v-row>
@@ -194,6 +196,11 @@ export default {
   },
 
     methods: {
+
+      fecharDialog(){
+        this.dialog = false
+        this.fone = this.salvarNum.numeroWhats
+      },
 
       callback_dialog() {
         this.dialogOptions.dialog = false;
