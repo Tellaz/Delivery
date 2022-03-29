@@ -55,36 +55,28 @@
                 grow
               >
                 <v-tab
-                  
-                  
+                v-for="item in abas" 
+                :key="item"
                 >
-                  cardápio
+                  {{item.name}}
                 </v-tab>
                 
               </v-tabs>
-
-                    
-              <v-tabs-items    v-model="tab">
+       
+              <v-tabs-items v-model="tab">
                 <v-tab-item
-
                 v-for="item in abas" 
                 :key="item"
-                
-                
                 >
                   <v-card
-                   
+                   v-if="tab == 0"
                     flat
                   >
                     <v-card-text >
-
-                     
-
                       <v-container >
                         <div class="d-flex justify-content-center">
 
                         <v-progress-circular
-                          
                           v-if="load"
                           :size="50"
                           color="white"
@@ -164,6 +156,101 @@
                   </v-card>
                 </v-tab-item>
               </v-tabs-items>
+
+              <v-tabs-items v-model="tab">
+                <v-tab-item
+                 v-for="item in abas" 
+                :key="item"
+                >
+                  <v-card
+                   v-if="tab == 1"
+                    flat
+                  >
+                    <v-card-text >
+                      <v-container >
+                        <div class="d-flex justify-content-center">
+
+                        <v-progress-circular
+                          v-if="load"
+                          :size="50"
+                          color="white"
+                          indeterminate
+                        ></v-progress-circular>
+                        </div>
+                         
+                        <v-row  dense> 
+                            <v-col
+                            v-for="(dessertsBebidas, i) in dessertsBebidas"
+                            :key="i"
+                            cols="12"    
+                            >
+                            <v-card
+                                :color="color"
+                                dark
+                            >
+                                <div  class="border border-1 d-flex flex-no-wrap justify-space-between">
+                                <div  >
+                                    <v-card-title
+                                    class="text-h5"
+                                    v-text="dessertsBebidas.nome"
+                                    ></v-card-title>
+
+                                    <v-card-subtitle class="text-h6" style="color: green;" v-text="'R$'+dessertsBebidas.preco"></v-card-subtitle>
+
+                                    <v-card-subtitle size="auto" v-text="dessertsBebidas.descricaoCurta"></v-card-subtitle>
+
+                                    <v-card-actions>
+                                    
+                                    <v-btn
+                                        v-if="dessertsBebidas.id > 0 "
+                                        class="ml-2 mt-5"
+                                        outlined
+                                        rounded
+                                        small
+                                        @click.prevent="addCart(dessertsBebidas)"
+                                    >
+                                        + Carrinho
+                                    </v-btn>
+                                   
+                                    </v-card-actions>
+                                    <v-card-actions>
+                                    
+                                    <v-btn
+                                        v-if="dessertsBebidas.id > 0 "
+                                        class="ml-2"
+                                        style="background-color: #6e1300; border-color: red;"
+                                        outlined
+                                        rounded
+                                        small
+                                        v-model="dessertsBebidas.id"
+                                        @click.prevent="removeCart(dessertsBebidas)"
+                                    >
+                                        Remover
+                                    </v-btn>
+                                   
+                                    </v-card-actions>
+                                </div>
+
+                                <v-avatar
+                                    class="ma-3"
+                                    size="auto"
+                                    tile
+                                    style="max-width: 200px;"
+                                >
+                                    <v-img class=" border border-color" :src="dessertsBebidas.urlImagem"></v-img>
+                                </v-avatar>
+                                </div>
+                            </v-card>
+                            </v-col>
+                          </v-row>
+                          </v-container>
+
+
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+              </v-tabs-items>
+
             </v-card>   
 
 
@@ -392,6 +479,7 @@ export default {
         pagamento: "",
         troco: 0
       }],
+      dessertsBebidas: [],
       dialog: false,
        tab: null,
        abas: [{id: 1, name:'lanches'}, {id: 2, name:'bebidas'},],
@@ -518,8 +606,14 @@ export default {
             this.load = true
             var produtos = await this.defaultService.getAll()
             this.produto = produtos.data
+            
             for (let i = 0; i < this.produto.length; i++) {
+              if (this.produto[i].categoria == 1) {
+                
                 this.desserts.push({ ...this.produto[i] })
+              }else{
+                this.dessertsBebidas.push({ ...this.produto[i] })
+              }
             }
            this.load = false
         },
