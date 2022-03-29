@@ -224,23 +224,23 @@ export default {
       this.title = "Cadastro de Admin";
       this.MethodBtn = "Cadastrar";
     }
-    if (this.$route.name == "produtoEdit") {
+    if (this.$route.name == "emailEdit") {
       this.method = "edit";
-      this.title = "Editando a Produto";
+      this.title = "Editando a email";
       this.MethodBtn = "Salvar alterações";
-      this.getProdutosByID();
+      this.getUsuarioByID();
       
     }
-    if (this.$route.name == "produtoRead") {
+    if (this.$route.name == "emailRead") {
       this.method = "read";
-      this.title = "Visualizando a Produto";
+      this.title = "Visualizando a email";
       this.inputDisable = true;
-      this.getProdutosByID();
+      this.getUsuarioByID();
     }
-    if (this.$route.name == "produtoRead") {
+    if (this.$route.name == "emailRead") {
       this.method = "read";
-      this.title = "Mostrando a Produto";
-      this.getProdutosByID();
+      this.title = "Mostrando a email";
+      this.getUsuarioByID();
     }
   },
 
@@ -271,7 +271,7 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      this.$router.push({ name: "perfil" });
+      this.$router.push({ name: "Perfil" });
       
      
     },
@@ -315,15 +315,14 @@ export default {
 
    
 
-    async getProdutosByID() {
+    async getUsuarioByID() {
       this.usuarioData.id = this.$route.params.id;
       var lancheByID = await this.defaultService.getById(this.usuarioData.id);
 
       this.usuarioData.nome = lancheByID.data.nome;
-      this.usuarioData.preco = lancheByID.data.preco;
-      this.usuarioData.descricaoCurta = lancheByID.data.descricaoCurta;
-      this.usuarioData.urlImagem = lancheByID.data.urlImagem;
-      // this.usuarioData.categoria = lancheByID.data.categoria;
+      this.usuarioData.email = lancheByID.data.email;
+      this.usuarioData.senha = lancheByID.data.senha;
+   
      
     },
 

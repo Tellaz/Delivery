@@ -43,6 +43,15 @@ const routes = [
   },
 
   {
+    path: '/email/:id/edit',
+    name: 'emailEdit',
+    component: Cadastro,
+    meta: {
+			authenticated: true,
+		}
+  },
+
+  {
     path: '/perfil',
     name: 'Perfil',
     component: Perfil,

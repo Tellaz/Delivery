@@ -114,15 +114,38 @@
                         </div>
                   </v-card>
                   <v-card
+                    height="200"
                     width="375"
                     class="mt-10"
                   >
-                    
-                        <div class="d-flex justify-content-center">
+                        <div class="mt-1 d-flex justify-content-center">
                         <v-btn small class="btn-gold " @click="cadastrarADM()">Cadastrar Novo ADM</v-btn>
                         </div>
-                        
-                        <hr>
+                         <hr>
+                  <v-data-table
+                  
+                    :headers="headers"
+                    :items="desserts"
+                    :footer-props="{
+                      'items-per-page-text': '',
+                      pageText: '{0}-{1} de {2}',
+                    }"
+                    sort-by="calories"
+                    class=" elevation-1"
+                  >
+                   
+                    <template v-slot:item.actions="{ item }">
+                      <div class="actions-inline">
+                        <v-icon small class="mr-2" @click="edittItem(item)">mdi-pencil</v-icon>
+                      </div>
+                    </template>
+
+                    <template v-slot:no-data>
+                      <div>Nenhum email cadastrado até o momento</div>
+                    </template>
+
+                  </v-data-table>
+
                   </v-card>
                 
             </v-col>
@@ -144,12 +167,14 @@ import { required } from "@vuelidate/validators";
 export default {
     created(){
         this.getNumero();
+        this.setDesserts();
     },
     setup() {
     return { v$: useVuelidate() };
   },
   data() {
        return {
+              dialogDelete: false,
               fone: "",
               Errors: 0,
               id: 0,
@@ -164,23 +189,20 @@ export default {
               type: "darken-2",
               botaoText: "",
             },
+            contas: [],
 
-//         dialogDelete: false,
-//             itemToBeDeleted: null,
-//             defaultService: null,
-//             produto: null,
-//             headers: [
-//                 { text: 'Numero', value: 'numeroWhats' },
+            headers: [
+                { text: 'Email', value: 'email' },
                 
+                {
+                  text: "Ações",
+                  value: "actions",
+                  sortable: false,
+                },
+            ],
+            desserts: [
+            ]
 
-//                 {
-//                   text: "Ações",
-//                   value: "actions",
-//                   sortable: false,
-//                 },
-//             ],
-//             desserts: [
-//             ]
               }
         },
 
@@ -213,6 +235,38 @@ export default {
         }
 
       },
+
+       async setDesserts() {
+            var usuarioService = new DefaultService(this.$http, "api/usuario");
+            var email = await usuarioService.getAll()
+            this.contas = email.data
+            for (let i = 0; i < this.contas.length; i++) {
+                this.desserts.push({ ...this.contas[i] })
+            }
+            
+        },
+
+       closeDelete() {
+            this.itemToBeDeleted = null
+            this.dialogDelete = false
+        },
+
+        deleteItem(item) {
+            this.dialogDelete = true
+            this.itemToBeDeleted = item
+        },
+
+        deleteItemConfirm() {
+          var usuarioService = new DefaultService(this.$http, "api/usuario");
+            usuarioService.delete(this.itemToBeDeleted)
+            this.desserts = []
+            this.dialogDelete = false
+            this.setDesserts()
+        },
+
+        edittItem(item) {
+            this.$router.push({ path: `email/${item.id}/edit` })
+        },
 
       async getNumero(){
       var usuarioService = new DefaultService(this.$http, "api/usuario");
@@ -276,41 +330,7 @@ export default {
         }
 
       }
-//       deleteItem (item) {
-//         this.editedIndex = this.desserts.indexOf(item)
-//         this.editedItem = Object.assign({}, item)
-//         this.dialogDelete = true
-//       },
 
-//       deleteItemConfirm () {
-//         this.desserts.splice(this.editedIndex, 1)
-//         this.closeDelete()
-//       },
-
-//       close () {
-//         this.dialog = false
-//         this.$nextTick(() => {
-//           this.editedItem = Object.assign({}, this.defaultItem)
-//           this.editedIndex = -1
-//         })
-//       },
-
-//       closeDelete () {
-//         this.dialogDelete = false
-//         this.$nextTick(() => {
-//           this.editedItem = Object.assign({}, this.defaultItem)
-//           this.editedIndex = -1
-//         })
-//       },
-
-//       save () {
-//         if (this.editedIndex > -1) {
-//           Object.assign(this.desserts[this.editedIndex], this.editedItem)
-//         } else {
-//           this.desserts.push(this.editedItem)
-//         }
-//         this.close()
-//       },
      }
    
 };
