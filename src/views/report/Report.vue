@@ -10,7 +10,7 @@
         
         :footer-props="{
           
-          'items-per-page-text': 'compra por página:', 
+          'items-per-page-text': 'compras por página:', 
           pageText: '{0}-{1} de {2}', 
         }"
         sort-by="calories"
