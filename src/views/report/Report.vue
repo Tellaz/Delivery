@@ -26,8 +26,9 @@
           <div v-if="load == false">Nenhuma compra até o momento</div>
         </template>
         <template v-slot:footer>
+          <hr>
         <div  class="d-flex justify-content-center">
-          <div v-if="load == false" class="p-2 rounded-3 border border-5 border-danger mt-5 mb-5 ">
+          <div v-if="load == false" class="p-2 rounded-3 border border-5 border-danger mb-4 ">
             Valor total de compras: R${{totalValor}}
           </div>  
         </div>
