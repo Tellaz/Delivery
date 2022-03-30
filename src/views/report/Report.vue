@@ -10,7 +10,7 @@
         
         :footer-props="{
           
-          'items-per-page-text': 'compra por página:',
+          'items-per-page-text': 'compra por página:', 
           pageText: '{0}-{1} de {2}', 
         }"
         sort-by="calories"
@@ -25,8 +25,16 @@
           ></v-progress-circular>
           <div v-if="load == false">Nenhuma compra até o momento</div>
         </template>
+        <template v-slot:footer>
+        <div  class="d-flex justify-content-center">
+          <div v-if="load == false" class="p-2 rounded-3 border border-5 border-danger mt-5 mb-5 ">
+            Valor total de compras: R${{totalValor}}
+          </div>  
+        </div>
+        </template>
 
       </v-data-table>
+      
 
   </div>
 </template>
@@ -47,7 +55,9 @@ export default {
       produtos: [],
       pushReports: [],
       vendas: [],
+      valorLanche: [],
       pushVendas: [],
+      totalValor: 0,
       
       // datas: []
 
@@ -72,18 +82,10 @@ export default {
     // this.setVendas();
     this.mesclarProduto();
     this.formatarData();
+    this.calcularTotalValor();
   },
 
   methods: {
-
-      // async totalValor(){
-      //     var vendaService =  new  DefaultService(this.$http, "api/venda");
-      //       var venda = await vendaService.getAll()
-      //       this.vendas = venda.data
-            
-      // },
-    
-
   
        async mesclarProduto(){
           this.load = true
@@ -95,7 +97,7 @@ export default {
           this.produto = produtos.data
 
           for (let index = 0; index < this.vendas.length; index++) {
-              console.log(this.vendas[index]);
+              this.totalValor = this.totalValor + this.vendas[index].total
             for (let i = 0; i < this.produto.length; i++) {
               
               if (this.vendas[index].lanches[0].idLanche == this.produto[i].id) {
@@ -105,7 +107,7 @@ export default {
                 
                 this.vendas[index].momentoVenda = data.toLocaleDateString('pt-BR')
 
-                this.pushReports.push({nome: this.produto[i].nome, preco: this.produto[i].preco, momentoVenda: this.vendas[index].momentoVenda})
+                this.pushReports.push({nome: this.produto[i].nome, preco: 'R$' + this.produto[i].preco, momentoVenda: this.vendas[index].momentoVenda})
 
    
               }
