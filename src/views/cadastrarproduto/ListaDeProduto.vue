@@ -124,7 +124,7 @@ export default {
             for (let i = 0; i < this.produto.length; i++) {
                 this.desserts.push({ ...this.produto[i] })
             }
-            console.log(this.desserts)
+            
         },
     //   async setDesserts(){
     //   this.items = new DefaultService(this.$http, "produto");

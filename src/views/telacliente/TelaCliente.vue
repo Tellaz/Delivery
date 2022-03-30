@@ -101,7 +101,7 @@
                                     v-text="desserts.nome"
                                     ></v-card-title>
 
-                                    <v-card-subtitle class="text-h6" style="color: green;" v-text="'R$'+desserts.preco"></v-card-subtitle>
+                                    <v-card-subtitle class="text-h6" style="color: green;" v-text="desserts.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })"></v-card-subtitle>
 
                                     <v-card-subtitle size="auto" v-text="desserts.descricaoCurta"></v-card-subtitle>
 
@@ -191,11 +191,11 @@
                                 <div  class="border border-1 d-flex flex-no-wrap justify-space-between">
                                 <div  >
                                     <v-card-title
-                                    class="nomeSemQuebra text-h5"
+                                    class="nomeSemQuebra text-h6"
                                     v-text="dessertsBebidas.nome"
                                     ></v-card-title>
 
-                                    <v-card-subtitle class="text-h6" style="color: green;" v-text="'R$'+dessertsBebidas.preco"></v-card-subtitle>
+                                    <v-card-subtitle class="text-h6" style="color: green;" v-text="dessertsBebidas.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })"></v-card-subtitle>
 
                                     <v-card-subtitle size="auto" v-text="dessertsBebidas.descricaoCurta"></v-card-subtitle>
 
@@ -470,6 +470,7 @@ export default {
 //   },
   data() {
     return {
+      
       load: false,
       cliente: [{
         nome: "",
@@ -606,9 +607,9 @@ export default {
             this.load = true
             var produtos = await this.defaultService.getAll()
             this.produto = produtos.data
-            
             for (let i = 0; i < this.produto.length; i++) {
               if (this.produto[i].categoria == 1) {
+                
                 
                 this.desserts.push({ ...this.produto[i] })
               }else{

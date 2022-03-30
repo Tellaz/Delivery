@@ -28,8 +28,8 @@
         <template v-slot:footer>
           <hr>
         <div  class="d-flex justify-content-center">
-          <div v-if="load == false" class="p-2 rounded-3 border border-5 border-danger mb-4 ">
-            Valor total de compras: R${{totalValor}}
+          <div v-if="load == false" class=" border-bottom border-1 mb-4 ">
+            Valor total de compras: {{totalValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })}}
           </div>  
         </div>
         </template>
@@ -98,6 +98,7 @@ export default {
           this.produto = produtos.data
 
           for (let index = 0; index < this.vendas.length; index++) {
+            
               this.totalValor = this.totalValor + this.vendas[index].total
             for (let i = 0; i < this.produto.length; i++) {
               
@@ -108,7 +109,7 @@ export default {
                 
                 this.vendas[index].momentoVenda = data.toLocaleDateString('pt-BR')
 
-                this.pushReports.push({nome: this.produto[i].nome, preco: 'R$' + this.produto[i].preco, momentoVenda: this.vendas[index].momentoVenda})
+                this.pushReports.push({nome: this.produto[i].nome, preco: this.produto[i].preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }), momentoVenda: this.vendas[index].momentoVenda})
 
    
               }

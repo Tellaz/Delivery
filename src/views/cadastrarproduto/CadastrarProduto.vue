@@ -369,7 +369,9 @@ export default {
 
     async submit() {
       const isFormCorrect = await this.v$.$validate(); 
-
+      let num =  this.produtoData.preco.replace(',','.');
+      this.produtoData.preco = num;
+      console.log(this.produtoData.preco);
       
       if (this.v$.$errors.length - this.Errors == 0) {
         //Caso houver erros do produtotype
