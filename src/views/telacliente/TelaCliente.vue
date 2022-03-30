@@ -287,7 +287,7 @@
                         md="8"
                         style="color: red; font-size: 30px;"
                       > Total:
-                        {{ valor }} 
+                        {{ valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }) }} 
                       </v-col>
                       <v-col
                         cols="12"
@@ -567,7 +567,7 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      window.open('https://api.whatsapp.com/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+      window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
       this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
       +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
       this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
