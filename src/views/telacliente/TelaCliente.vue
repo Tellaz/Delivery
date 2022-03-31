@@ -35,20 +35,25 @@
               <v-card-title  class="d-flex justify-content-center py-1">
                 <img  class=" border-5 border-dark logo-site" src="../../../public/Dico.png" alt="">
               </v-card-title>
-
-              
+            
             <v-card class=" mb-5 borda-cardapio">
               
                 <div class=" ml-5 border-color d-flex justify-content-right">
                   <div class="d-flex justify-center icon-cesta">
                     <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
-                      {{ cart.length }}
+                      {{ cart.length }} 
                     </h3>
+                    
                     <img class="" style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
                   </div>
                     
                 </div>
-
+                <div class="ml-2">
+                    Lista: 
+                </div>
+                  <li class="ml-5" v-for="(item, i) in nomeProduto" :key="i" >
+                    {{ nomeProduto[i].nome }}
+                  </li>
               <v-tabs
                 v-model="tab"
                 background-color="transparent"
@@ -497,6 +502,7 @@ export default {
       valor: 0,
       totalProdutos: [],
       produtosTela: [],
+      nomeProduto: [],
       produtos: [{
         id: null,
         name: "",
@@ -580,16 +586,21 @@ export default {
     addCart(product){
       this.cart.push(product)
       
+      this.nomeProduto.push(product) 
+      
     },
 
     inCart(product){
-      return this.cart.indexOf(product) != -1
+      return this.cart.indexOf(product) != -1 
     },
 
     removeCart(product){
       
       this.cart = this.cart.filter((prod) => {
         return product != prod
+      })
+      this.nomeProduto = this.nomeProduto.filter((prodt) => {
+        return product != prodt
       })
       
       
@@ -634,14 +645,20 @@ export default {
       });
     },
 
-    clearCart(product) {
-      this.cart.pop();
+    clearCart() {
+      //this.cart.pop();
+      //this.nomeProduto.pop();
       this.valor = 0;
       this.totalProdutos = [];
       this.produtosTela = [];
-      this.cart = this.cart.filter((prod) => {
-        return product != prod
-      })
+      this.cart = [];
+      this.nomeProduto = [];
+      // this.cart.filter((prod) => {
+      //   return product != prod
+      // })
+      // this.nomeProduto.filter((prod) => {
+      //   return product != prod
+      // })
 
     },
 
