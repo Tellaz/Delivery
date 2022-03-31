@@ -6,7 +6,7 @@
       
       />
 
-      <div class="border border-5 rounded-circle" style=" position: absolute; top: 0px; right: -60px;" >
+      <div class="border border-5 rounded-circle" style=" float: right; " >
       <router-link class="remove-underline" :to="{name:'TelaCliente'}" active-class="link-ativo">
          <font-awesome-icon :icon="iconeHome" class="bg-emCima p-1 ml-1 mr-1 mt-1"/>
       </router-link>
