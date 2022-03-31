@@ -34,6 +34,12 @@
               
               <v-card-title  class="d-flex justify-content-center py-1">
                 <img  class=" border-5 border-dark logo-site" src="../../../public/Dico.png" alt="">
+                
+                <div class="border border-5 rounded-circle" style=" position: absolute; top: 0px; right: -60px;" >
+                  <router-link class="remove-underline" :to="{ name: 'Login' }" active-class="link-ativo">
+                   <font-awesome-icon :icon="iconeAdm" class="bg-emCima p-1 ml-1 mr-1 mt-1"/>
+                  </router-link>
+                </div>
               </v-card-title>
             
             <v-card class=" mb-5 borda-cardapio">
@@ -512,7 +518,7 @@ export default {
         categoria: 0,
       }],
       cart: [],
-
+      iconeAdm: "fa-solid fa-user-lock",
       color: '(112, 112, 112)',
       
 
@@ -701,7 +707,7 @@ export default {
                         }],
                       };
                       
-                  
+
                       var vendaService =  new  DefaultService(this.$http, "api/venda");
                         vendaService.post(venda)
                         .then(() => {
@@ -758,11 +764,15 @@ v-btn{
 
 .logo-site{
  border-radius: 0px 0px 50px 50px ;
- margin-top: -15px;
- 
- 
+ margin-top: -15px; 
  
 }
+
+.bg-emCima:hover {
+  width: 27px;
+  height: 22px;
+}
+
 
 .margin-logo{
   

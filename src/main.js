@@ -6,13 +6,11 @@ import router from './router'
 import { BootstrapVue, IconsPlugin } from './plugins/bootstrap'
 import 'dotenv/config'
 
-
-
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faShuttleSpace, faUser, faBurger, faCirclePlus, faScrewdriverWrench, faScrewdriver, faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { faShuttleSpace, faHouseChimney, faUserLock, faUser, faBurger, faCirclePlus, faScrewdriverWrench, faScrewdriver, faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faShuttleSpace, faUser, faBurger, faCirclePlus, faScrewdriverWrench, faScrewdriver, faCircleExclamation)
+library.add(faShuttleSpace, faHouseChimney, faUserLock, faUser, faBurger, faCirclePlus, faScrewdriverWrench, faScrewdriver, faCircleExclamation)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

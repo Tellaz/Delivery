@@ -5,6 +5,12 @@
       @dialog_false="callback_dialog"
       
       />
+
+      <div class="border border-5 rounded-circle" style=" position: absolute; top: 0px; right: -60px;" >
+      <router-link class="remove-underline" :to="{name:'TelaCliente'}" active-class="link-ativo">
+         <font-awesome-icon :icon="iconeHome" class="bg-emCima p-1 ml-1 mr-1 mt-1"/>
+      </router-link>
+      </div>
       <v-content>
          <v-container fluid fill-height>
             <v-layout align-center justify-center>
@@ -71,7 +77,7 @@ export default {
         return {
            
          requeresAuth: false,
-            
+            iconeHome: "fa-solid fa-house-chimney",
            defaultService: null,
            salvarAlteraçõesLoading: false,
            dialogOptions: {
@@ -168,5 +174,11 @@ export default {
 </script>
 
 <style lang="scss">
+
+.bg-emCima:hover {
+  width: 20px;
+  height: 20px;
+}
+
 @import "../../assets/scss/index.scss";
 </style>

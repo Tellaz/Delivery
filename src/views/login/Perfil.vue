@@ -60,16 +60,10 @@
     </v-row>
   </template>
 
-    <template>
-      <v-item-group >
-        <v-container >
-          <v-row>
-            <v-col
-              
-              class="d-flex justify-content-around"
-              cols="12"
-              md="12"
-            >
+    
+        
+              <div class="d-flex justify-content-center" >
+
               
                   <v-card
                     max-width="375"
@@ -113,6 +107,9 @@
                         
                         </div>
                   </v-card>
+            </div>
+
+            <div class="d-flex justify-content-center ">
                   <v-card
                     height="200"
                     width="375"
@@ -131,7 +128,7 @@
                       pageText: '{0}-{1} de {2}',
                     }"
                     sort-by="calories"
-                    class=" elevation-1"
+                    class="mb-10 elevation-1"
                   >
                    
                     <template v-slot:item.actions="{ item }">
@@ -147,13 +144,7 @@
                   </v-data-table>
 
                   </v-card>
-                
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-item-group>
-    </template>
-
+            </div>
           
     
 </div>

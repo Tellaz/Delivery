@@ -1,11 +1,32 @@
 <template >
   <div>
+    <DialogMessage
+            :dialogOptions="dialogOptions"
+            @dialog_false="callback_dialog"
+            />
     <v-app-bar class="App-bar-bg" dense dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Menu</v-toolbar-title>
 
       <v-spacer></v-spacer>
+
+      
+      <v-btn
+        class="ma-2"
+        color="red darken-4"
+        dark
+        @click="sair()"
+        
+      >
+        <v-icon
+          dark
+          left
+        >
+          mdi-arrow-left
+        </v-icon>Sair
+      </v-btn>
+
 
       <v-menu left bottom>
         <template>
@@ -46,7 +67,7 @@
   </div>
 </template>
 <script>
-
+import DialogMessage from "../components/DialogMessage.vue";
 export default {
 
   created(){
@@ -55,7 +76,15 @@ export default {
 
   data() {
     return {
-      
+      salvarAlteraçõesLoading: false,
+           dialogOptions: {
+            title: "",
+            dialog: false,
+            message: "",
+            type: "darken-2",
+            botaoText: "",
+            },
+      dialogLoaging: false,
       drawer: false,
       rota: "",
       links: [
@@ -84,6 +113,38 @@ export default {
       ],
     };
   },
+   components: {
+    DialogMessage,
+  },
+
+  methods: {
+
+     callback_dialog() {
+      this.dialogOptions.dialog = false;
+      this.deleteLoading = false;
+      this.dialogLoaging = false;
+      window.location.reload()
+      if (this.error) {
+        this.salvarAlteraçõesLoading = false;
+        return;
+      }
+      this.$router.push({ name: "Login" });
+    },
+
+    sair(){
+      this.salvarAlteraçõesLoading = true;
+      localStorage.setItem('token', "")
+      window.sessionStorage.setItem('tokens', "");
+      this.dialogOptions.title = "Sucesso!";
+      this.dialogOptions.message = "Voce sera redirecionado para o Login!";
+      this.dialogOptions.type = "success";
+      this.dialogOptions.botaoText = "Ok";
+      this.dialogOptions.dialog = true;
+      
+      this.salvarAlteraçõesLoading = false;
+      
+    }
+  }
 
 
   
