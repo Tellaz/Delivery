@@ -220,7 +220,7 @@
                                     <v-card-actions>
                                     
                                     <v-btn
-                                        v-if="dessertsBebidas.id > 0 "
+                                        v-if="dessertsBebidas.id > 0 && statusRestaurante == 'Aberto'"
                                         class="ml-2 mt-5"
                                         outlined
                                         rounded
@@ -234,7 +234,7 @@
                                     <v-card-actions>
                                     
                                     <v-btn
-                                        v-if="dessertsBebidas.id > 0 "
+                                        v-if="dessertsBebidas.id > 0 && statusRestaurante == 'Aberto'"
                                         class="ml-2"
                                         style="background-color: #6e1300; border-color: red;"
                                         outlined
