@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-axios.defaults.baseURL = 'https://lanchoneteapi.azurewebsites.net'
+axios.defaults.baseURL = 'https://lanchonete.azurewebsites.net'
 
 
 //process.env.VUE_APP_BASE_URL

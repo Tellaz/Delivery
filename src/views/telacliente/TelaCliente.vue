@@ -50,9 +50,14 @@
                       {{ cart.length }} 
                     </h3>
                     
-                    <img class="" style="size: 10px;"  src="../../../public/carrinho-de-compras.png" />
+                    <img class="" style="size: 10px;"  src="../../../public/carrinho-de-compras.png" /> 
                   </div>
-                    
+                  <div v-if="statusRestaurante == 'Aberto'" class="mt-5 border-aberto pl-2 pr-2 p-1" style=" position: absolute; top: 0px; right: 46%;" >
+                    Aberto
+                  </div>
+                  <div  v-if="statusRestaurante == 'Fechado'" class="mt-5 border-fechado pl-2 pr-2 p-1" style=" position: absolute; top: 0px; right: 45.3%;" >
+                    Fechado
+                  </div>
                 </div>
                 <div class="ml-2">
                     Lista: 
@@ -60,6 +65,8 @@
                   <li class="ml-5" v-for="(item, i) in nomeProduto" :key="i" >
                     {{ nomeProduto[i].nome }}
                   </li>
+
+
               <v-tabs
                 v-model="tab"
                 background-color="transparent"
@@ -119,7 +126,7 @@
                                     <v-card-actions>
                                     
                                     <v-btn
-                                        v-if="desserts.id > 0 "
+                                        v-if="desserts.id > 0 && statusRestaurante == 'Aberto' "
                                         class="ml-2 mt-5"
                                         outlined
                                         rounded
@@ -133,7 +140,7 @@
                                     <v-card-actions>
                                     
                                     <v-btn
-                                        v-if="desserts.id > 0 "
+                                        v-if="desserts.id > 0 && statusRestaurante == 'Aberto'"
                                         class="ml-2"
                                         style="background-color: #6e1300; border-color: red;"
                                         outlined
@@ -451,6 +458,7 @@ export default {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
         this.setDesserts();
         this.getNumero();
+        this.getStatus();
       },
   setup() {
     return { v$: useVuelidate() };
@@ -481,7 +489,7 @@ export default {
 //   },
   data() {
     return {
-      
+      statusRestaurante: "",
       load: false,
       cliente: [{
         nome: "",
@@ -620,6 +628,13 @@ export default {
       
     },
 
+    async getStatus(){
+      var StatusService = new DefaultService(this.$http, "api/status");
+      var status = await StatusService.getAll();
+      this.statusRestaurante = status.data
+      
+    },
+
     async setDesserts() {
             this.load = true
             var produtos = await this.defaultService.getAll()
@@ -751,6 +766,20 @@ img {
 }
 v-btn{
   white-space: normal;
+}
+
+.border-aberto{
+  border: 3px;
+  border-color: rgb(0, 247, 12);
+  border-style: solid;
+  border-radius: 20px;
+}
+
+.border-fechado{
+  border: 3px;
+  border-color: rgb(255, 17, 0);
+  border-style: solid;
+  border-radius: 20px;
 }
 
 .nomeSemQuebra{
