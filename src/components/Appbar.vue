@@ -123,7 +123,7 @@ export default {
       this.dialogOptions.dialog = false;
       this.deleteLoading = false;
       this.dialogLoaging = false;
-      window.location.reload()
+      
       if (this.error) {
         this.salvarAlteraçõesLoading = false;
         return;
@@ -138,9 +138,9 @@ export default {
       this.dialogOptions.title = "Sucesso!";
       this.dialogOptions.message = "Voce sera redirecionado para o Login!";
       this.dialogOptions.type = "success";
-      this.dialogOptions.botaoText = "Ok";
-      this.dialogOptions.dialog = true;
       
+      this.dialogOptions.dialog = true;
+      window.location.reload()
       this.salvarAlteraçõesLoading = false;
       
     }
