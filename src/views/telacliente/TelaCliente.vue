@@ -708,20 +708,25 @@ export default {
         //Caso houver erros do produtotype
         this.salvarAlteraçõesLoading = true;
       
-      for (let index = 0; index < this.cart.length; index++) {
 
         var venda = {
-                        id: 1,
-                        codigo: "string",
-                        idUsuario: 1,
-                        lanches:[{
-                          id: 1,
-                          codigoVenda: "string",
-                          idLanche: this.cart[index].id,
-                          quantidade: 1,
-                        }],
-                      };
-                      
+          id: 1,
+          codigo: "string",
+          idUsuario: 1,
+          lanches:[],
+        };
+         
+
+          for (let index = 0; index < this.cart.length; index++) {
+              venda.lanches.push({
+              id: 0,
+              idLanche: this.cart[index].id,
+              quantidade: 1,
+             })
+          }
+           console.log(venda);
+                
+        
 
                       var vendaService =  new  DefaultService(this.$http, "api/venda");
                         vendaService.post(venda)
@@ -746,7 +751,7 @@ export default {
                         return error;
                       }); 
         
-      }
+      
 
       }else {
         return isFormCorrect;
