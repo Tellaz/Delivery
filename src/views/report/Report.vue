@@ -103,23 +103,71 @@ export default {
 
           var produtos = await this.defaultService.getAll()
           this.produto = produtos.data
-
+          
           for (let index = 0; index < this.vendas.length; index++) {
             
               this.totalValor = this.totalValor + this.vendas[index].total
             for (let i = 0; i < this.produto.length; i++) {
 
-              for (let j = 0; j < this.vendas[index].lanches.length; j++) {
-                
-                
-                
-                if (this.vendas[index].lanches[j].idLanche == this.produto[i].id) {
+            
+              
+              if (this.vendas[index].lanches.length > 1) {
+                for (let i = 0; i < this.produto.length; i++) {
                   
-                  let data = new Date(this.vendas[index].momentoVenda);
+                  for (let j = 0; j < this.vendas[index].lanches.length; j++) {
+  
+                      if (this.vendas[index].lanches[j].idLanche == this.produto[i].id) {
+                        
+                        this.nomeLanches = this.nomeLanches + this.produto[i].nome +" | " ;
+                        
+                      }
+                    
+                  }
+                  
+                }
+                if (this.vendas[index].lanches[0].idLanche == this.produto[i].id) {
+                console.log(this.nomeLanches)
+
+                let data = new Date(this.vendas[index].momentoVenda);
+                
+                this.vendas[index].momentoVenda = data.toLocaleDateString('pt-BR')
+
+                
+                // this.vendas[index].id = this.vendas[index].id.filter((ele , pos) =>{
+                //     return this.vendas[index].id.indexOf(ele) == pos;
+                // }) 
+                
+                // var uniqueArr = [...new Set(this.vendas.id)]
+                // console.log(uniqueArr);
+
+                // console.log(this.vendas[index].id);
+                this.pushReports.push({
+                  id: this.vendas[index].id,
+                  lanches: this.nomeLanches,
+                  preco: this.vendas[index].total.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }), 
+                  momentoVenda: this.vendas[index].momentoVenda})
+
+                }
+                }
+                else{
+
+                for (let j = 0; j < this.vendas[index].lanches.length; j++) {
+                 if (this.vendas[index].lanches[0].idLanche == this.produto[i].id) {
+                   
+                   let data = new Date(this.vendas[index].momentoVenda);
                 
                 
                 this.vendas[index].momentoVenda = data.toLocaleDateString('pt-BR')
 
+                
+                // this.vendas[index].id = this.vendas[index].id.filter((ele , pos) =>{
+                //     return this.vendas[index].id.indexOf(ele) == pos;
+                // }) 
+                
+                // var uniqueArr = [...new Set(this.vendas.id)]
+                // console.log(uniqueArr);
+
+                // console.log(this.vendas[index].id);
                 this.pushReports.push({
                   id: this.vendas[index].id,
                   lanches: this.produto[i].nome,
@@ -128,20 +176,20 @@ export default {
 
                 }
               }
+              }
 
             }
           }
-            
-          
+
           this.load = false
           
         },
-      calcular(){
-      for (let index = 0; index < this.pushReports.length; index++) {
-          this.nomeLanches =  this.nomeLanches + this.pushReports[index].lanches;         
-      }
-      console.log(this.nomeLanches);
-    }
+    //   calcular(){
+    //   for (let index = 0; index < this.pushReports.length; index++) {
+    //       this.nomeLanches =  this.nomeLanches + this.pushReports[index].lanches;         
+    //   }
+      
+    // }
 
 
 
