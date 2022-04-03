@@ -595,6 +595,11 @@ export default {
       
       this.clearInputs();
       this.clearCart();
+      this.valor = 0;
+      this.totalProdutos = [];
+      this.produtosTela = [];
+      this.cart = [];
+      this.nomeProduto = [];
     },
 
     addCart(product){

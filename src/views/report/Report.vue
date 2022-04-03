@@ -147,7 +147,10 @@ export default {
                   preco: this.vendas[index].total.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }), 
                   momentoVenda: this.vendas[index].momentoVenda})
 
+                  
+
                 }
+                this.nomeLanches = []
                 }
                 else{
 
