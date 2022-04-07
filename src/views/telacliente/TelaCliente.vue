@@ -42,9 +42,7 @@
                 </div>
               </v-card-title>
             
-            <v-card class=" mb-5 borda-cardapio">
-              
-                    <div class="d-flex justify-content-center" >
+                    <div class="mb-7 d-flex justify-content-center" >
                       <div v-if="statusRestaurante == 'Aberto'" class="mt-5 border-aberto pl-2 pr-2 p-1">
                         Aberto
                       </div>
@@ -52,6 +50,8 @@
                         Fechado
                       </div>
                     </div>
+            <v-card class=" mb-5 borda-cardapio">
+              
                 <div class=" ml-5 border-color d-flex justify-content-right">
                   <div class="d-flex justify-center icon-cesta">
                     <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
