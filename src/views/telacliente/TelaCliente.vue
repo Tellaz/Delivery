@@ -44,27 +44,28 @@
             
             <v-card class=" mb-5 borda-cardapio">
               
+                    <div class="d-flex justify-content-center" >
+                      <div v-if="statusRestaurante == 'Aberto'" class="mt-5 border-aberto pl-2 pr-2 p-1">
+                        Aberto
+                      </div>
+                      <div  v-if="statusRestaurante == 'Fechado'" class="mt-5 border-fechado pl-2 pr-2 p-1" >
+                        Fechado
+                      </div>
+                    </div>
                 <div class=" ml-5 border-color d-flex justify-content-right">
                   <div class="d-flex justify-center icon-cesta">
                     <h3 class="rounded-circle pl-2 pr-2 pt-1 border border-2 mt-6" style=" background-color: black; position: absolute;" >
                       {{ cart.length }} 
                     </h3>
-                    
                     <img class="" style="size: 10px;"  src="../../../public/carrinho-de-compras.png" /> 
                   </div>
-                  <div v-if="statusRestaurante == 'Aberto'" class="mt-5 border-aberto pl-2 pr-2 p-1" style=" position: absolute; top: 0px; right: 46%;" >
-                    Aberto
-                  </div>
-                  <div  v-if="statusRestaurante == 'Fechado'" class="mt-5 border-fechado pl-2 pr-2 p-1" style=" position: absolute; top: 0px; right: 45.3%;" >
-                    Fechado
-                  </div>
                 </div>
-                <div class="ml-2">
+                <div class="d-flex justify-content-start ml-3">
                     Lista: 
-                </div>
                   <li class="ml-5" v-for="(item, i) in nomeProduto" :key="i" >
                     {{ nomeProduto[i].nome }}
                   </li>
+                </div>
 
 
               <v-tabs
