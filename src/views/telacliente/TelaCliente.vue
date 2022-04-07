@@ -42,7 +42,7 @@
                 </div>
               </v-card-title>
             
-                    <div class="mb-7 d-flex justify-content-center" >
+                    <div class=" mb-6 d-flex justify-content-center" >
                       <div v-if="statusRestaurante == 'Aberto'" class="mt-5 border-aberto pl-2 pr-2 p-1">
                         Aberto
                       </div>
@@ -60,13 +60,23 @@
                     <img class="" style="size: 10px;"  src="../../../public/carrinho-de-compras.png" /> 
                   </div>
                 </div>
-                <div class="d-flex justify-content-start ml-3">
-                    Lista: 
-                  <li class="ml-5" v-for="(item, i) in nomeProduto" :key="i" >
-                    {{ nomeProduto[i].nome }}
-                  </li>
+                <div class="row justify-content-end mr-1 ml-1">
+                  <div v-if="tab == 1"  class="col-6 mb-5 mt-5 border-lista pl-2 pr-2 p-1 d-flex  flex-wrap margin-0 ml-1">
+                      Lista: 
+                    <li  class=" ml-5" v-for="(item, i) in nomeProduto" :key="i" >
+                      {{ nomeProduto[i].nome }}
+                    </li>
+                  </div>
                 </div>
 
+                <div v-if="tab == 0" class="row justify-content-start mr-1 ml-1">
+                  <div  class="col-6 mb-5 mt-5 border-lista pl-2 pr-2 p-1 d-flex  flex-wrap mr-1 ml-1">
+                      Lista: 
+                    <li  class=" ml-5" v-for="(item, i) in nomeProduto" :key="i" >
+                      {{ nomeProduto[i].nome }}
+                    </li>
+                  </div>
+                </div>
 
               <v-tabs
                 v-model="tab"
@@ -786,6 +796,20 @@ v-btn{
   border-color: rgb(0, 247, 12);
   border-style: solid;
   border-radius: 20px;
+}
+
+.margin-0{
+  margin-right: -3px;
+}
+
+.border-lista{
+  border: 2px;
+  border-color: rgb(255, 255, 255);
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-left-style: dotted;
+  border-right-style: solid;
+  border-radius: 0px 5px 5px 0px;
 }
 
 .border-fechado{
