@@ -5,14 +5,26 @@
             @dialog_false="callback_dialog"
             />
     <v-app-bar class="App-bar-bg" dense dark>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="rota != 'TelaCliente' && rota != 'Login'" @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Menu</v-toolbar-title>
+      <v-toolbar-title v-if="rota != 'TelaCliente' && rota != 'Login'" >Menu</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      
+      <div @click="rota = 'Login'" v-if="rota == 'TelaCliente'" class="border border-2 rounded-circle" >
+        <router-link class="remove-underline" :to="{ name: 'Login' }" active-class="link-ativo">
+          <font-awesome-icon :icon="iconeAdm" class="bg-emCima p-2"/>
+        </router-link>
+      </div>
+
+      <div @click="rota = 'TelaCliente'" v-if="rota == 'Login'" class="border border-2 rounded-circle" >
+      <router-link class="remove-underline" :to="{name:'TelaCliente'}" active-class="link-ativo">
+         <font-awesome-icon :icon="iconeHome" class="bg-emCima p-1 ml-1 mr-1 mt-1"/>
+      </router-link>
+      </div>
+
       <v-btn
+        v-if="rota != 'TelaCliente' && rota != 'Login'"
         class="ma-2"
         color="red darken-4"
         dark
@@ -76,6 +88,8 @@ export default {
 
   data() {
     return {
+      iconeHome: "fa-solid fa-house-chimney",
+      iconeAdm: "fa-solid fa-user-lock",
       salvarAlteraçõesLoading: false,
            dialogOptions: {
             title: "",

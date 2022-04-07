@@ -6,11 +6,7 @@
       
       />
 
-      <div class="border border-2 rounded-circle" style=" float: right; " >
-      <router-link class="remove-underline" :to="{name:'TelaCliente'}" active-class="link-ativo">
-         <font-awesome-icon :icon="iconeHome" class="bg-emCima p-1 ml-1 mr-1 mt-1"/>
-      </router-link>
-      </div>
+      
       <v-content>
          <v-container fluid fill-height>
             <v-layout align-center justify-center>
@@ -77,7 +73,7 @@ export default {
         return {
            
          requeresAuth: false,
-            iconeHome: "fa-solid fa-house-chimney",
+            
            defaultService: null,
            salvarAlteraçõesLoading: false,
            dialogOptions: {
