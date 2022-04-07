@@ -795,7 +795,8 @@ v-btn{
 }
 
 .nomeSemQuebra{
- white-space: nowrap !important;
+ //white-space: pre !important;
+ word-break: normal;
 }
 
 .icon-cesta {
