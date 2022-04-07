@@ -356,6 +356,7 @@
                           sm="6"
                           md="4">---------------------------
                         <v-text-field
+                          onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                           label="Número"
                           v-model="cliente.numero"
                           required
@@ -404,6 +405,7 @@
                           sm="6"
                           md="4">opcional
                         <v-text-field
+                          onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                           label="Troco para:"
                           v-model="cliente.troco"
                         ></v-text-field>

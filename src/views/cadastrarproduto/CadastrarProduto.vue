@@ -47,6 +47,7 @@
       </div>
 
       <v-text-field
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
         label="Preço"
         v-model="produtoData.preco"
         color="white"
