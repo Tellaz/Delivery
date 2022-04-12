@@ -26,6 +26,7 @@
                   <v-text-field
                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                     v-model="fone"
+                    v-mask="'+55(##)#####-####'"
                     label="Numero"
                     required
                   ></v-text-field>

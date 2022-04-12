@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import './plugins/axios'
+import VueMask from 'v-mask'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import router from './router'
@@ -13,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faShuttleSpace, faHouseChimney, faUserLock, faUser, faBurger, faCirclePlus, faScrewdriverWrench, faScrewdriver, faCircleExclamation)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+Vue.use(VueMask);
 Vue.config.productionTip = false
 
 Vue.config.productionTip = false
