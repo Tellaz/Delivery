@@ -596,11 +596,44 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      window.open('https://api.whatsapp.com/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
-      this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
-      +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
-      this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
-      '%0AForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0ATroco%20para:%20'+this.cliente.troco+'%20');
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera || window.chrome;
+      if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) )
+      {
+        if (this.cliente.troco > 0) {
+          
+          window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+          this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
+          +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
+          this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
+          '%0AForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0ATroco%20para:%20'+this.cliente.troco+'%20Reais');
+        }else{
+          window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+          this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
+          +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
+          this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
+          '%0AForma%20de%20pagamento:%20'+this.cliente.pagamento);
+
+        }
+      }
+      else
+      {
+        if (this.cliente.troco > 0) {
+          
+          window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+          this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
+          +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
+          this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
+          '%0AForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0ATroco%20para:%20'+this.cliente.troco+'%20Reais');
+        }else{
+          window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+          this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
+          +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
+          this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
+          '%0AForma%20de%20pagamento:%20'+this.cliente.pagamento);
+
+        }
+      }
+      
       
       this.clearInputs();
       this.clearCart();
