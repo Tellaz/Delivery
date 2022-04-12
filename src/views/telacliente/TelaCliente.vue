@@ -596,8 +596,8 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      var tipo = getMobileOperatingSystem();
-      if( tipo == "iOS" )
+     
+      if( navigator.userAgent.match(/iPhone|iPad|iPod/i) )
       {
         if (this.cliente.troco > 0) {
           
