@@ -462,6 +462,7 @@ import DialogMessage from "../../components/DialogMessage.vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import DefaultService from "../../services/defaultService";
+import { isIOS } from 'mobile-device-detect';
 export default {
       created() {
         this.defaultService = new DefaultService(this.$http, 'api/lanche')
@@ -521,6 +522,7 @@ export default {
         type: "darken-2",
         botaoText: "",
       },
+      
       numeroTelefone: [],
       valor: 0,
       totalProdutos: [],
@@ -586,6 +588,7 @@ export default {
   },
 
   methods: {
+
     
 
     callback_dialog() {
@@ -597,11 +600,8 @@ export default {
         this.salvarAlteraçõesLoading = false;
         return;
       }
-      
-        if(  navigator.userAgent.match(/iPhone/i)
-          || navigator.userAgent.match(/iPad/i)
-          || navigator.userAgent.match(/iPod/i) 
-          )
+        
+        if( isIOS )
         {
           if (this.cliente.troco > 0) {
             
