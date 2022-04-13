@@ -598,7 +598,10 @@ export default {
         return;
       }
       
-        if(/iPhone|iPad|iPod/i.test(navigator.userAgent))
+        if(  navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/iPad/i)
+          || navigator.userAgent.match(/iPod/i) 
+          )
         {
           if (this.cliente.troco > 0) {
             
