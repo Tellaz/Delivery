@@ -605,13 +605,13 @@ export default {
         {
           if (this.cliente.troco > 0) {
             
-            window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+            window.open('https://wa.me/'+this.numeroTelefone+'?text=Pedido%0A--------------%0A'+
             this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
             +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
             this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
             '%0AForma%20de%20pagamento:%20'+this.cliente.pagamento+'%0ATroco%20para:%20'+this.cliente.troco+'%20Reais');
           }else{
-            window.open('https://wa.me/send?phone='+this.numeroTelefone+'&text=Pedido%0A--------------%0A'+
+            window.open('https://wa.me/'+this.numeroTelefone+'?text=Pedido%0A--------------%0A'+
             this.totalProdutos+'%0ATotal:%20'+this.valor+'%20Reais%0A%0A--------------%0ANome:%20'+this.cliente.nome
             +'%0A--------------%0AEndereço%0A--------------%0ARua:%20'+this.cliente.rua +'%0ABairro:%20'+
             this.cliente.bairro +'%0ANumero:%20'+this.cliente.numero +
