@@ -31,7 +31,7 @@
     </v-dialog>
 
     <div class="d-flex justify-center titulo">{{ title }}</div>
-    <div>
+    <div class="rounded-xl bg-dark p-3">
       <v-text-field
         label="Nome"
         v-model="produtoData.nome"
@@ -45,11 +45,14 @@
           não pode ficar vazio
         </v-alert>
       </div>
+      <div>
+      <money style="display: none;" v-model="produtoData.preco" v-bind="money"></money> 
+      </div>
 
       <v-text-field
-        
         label="Preço"
         v-model="produtoData.preco"
+        v-bind="money"
         color="white"
         :disabled="inputDisable"
       ></v-text-field>
@@ -62,7 +65,7 @@
       </div>
 
       <v-text-field
-        label="Imagem"
+        label="Link Imagem"
         v-model="produtoData.urlImagem"
         color="white"
         :disabled="inputDisable"
@@ -79,10 +82,11 @@
       <v-select
           :items="abas"
           item-text="name"
-          item-value="id"   
+          item-value="id"  
           v-model="produtoData.categoria"
           label="Categoria"
-        ></v-select>
+        >
+        </v-select>
         <div v-if="v$.produtoData.categoria.$error">
         <v-alert border="bottom" color="pink darken-1" dark>
           O campo
@@ -150,6 +154,7 @@ import DialogMessage from "../../components/DialogMessage.vue";
 import DefaultService from "../../services/defaultService";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import {Money} from 'v-money'
 
 export default {
   setup() {
@@ -162,9 +167,14 @@ export default {
       salvarAlteraçõesLoading: false,
       itemsYear: [],
       year: null,
-      
+      money: {
+          decimal: '.',
+          thousands: ',',
+          precision: 2,
+          masked: true
+      },
       Errors: 0,
-      abas: [{id: 1, name:'Lanche'}, {id: 2, name:'Bebida'},],
+      abas: [ {name:''}, {id: 1, name:'Lanche'},  {id: 2, name:'Bebida'}],
       dialogOptions: {
         title: "",
         dialog: false,
@@ -187,7 +197,7 @@ export default {
         preco: 0,
         urlImagem: "",
         descricaoCurta: "",
-        categoria: 1,
+        categoria: 0,
         urlCapa: "string",
         
        
@@ -269,7 +279,7 @@ export default {
     }
   },
 
-  components: { DialogMessage, DialogDelete },
+  components: { DialogMessage, DialogDelete, Money },
   
   validations() {
     return {
@@ -369,11 +379,11 @@ export default {
    
 
     async submit() {
-      if (this.method == 'create') {
+      // if (this.method == 'create') {
         
-        let num =  this.produtoData.preco.replace(',','.');
-        this.produtoData.preco = num;
-        }
+      //   let num =  this.produtoData.preco.replace(',','.');
+      //   this.produtoData.preco = num;
+      //   }
         const isFormCorrect = await this.v$.$validate(); 
       
       

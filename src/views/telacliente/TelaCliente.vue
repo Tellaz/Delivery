@@ -166,7 +166,7 @@
                                     class="ma-3"
                                     size="auto"
                                     tile
-                                    style="max-width: 200px;"
+                                    style="max-width: 25%;"
                                 >
                                     <v-img class=" border border-color" :src="desserts.urlImagem"></v-img>
                                 </v-avatar>
@@ -260,7 +260,7 @@
                                     class="ma-3"
                                     size="auto"
                                     tile
-                                    style="max-width: 200px;"
+                                    style="width: 20%;"
                                 >
                                     <v-img class=" border border-color" :src="dessertsBebidas.urlImagem"></v-img>
                                 </v-avatar>
