@@ -63,14 +63,43 @@
           não pode ficar vazio
         </v-alert>
       </div>
-
+      <v-container>
+      <v-row no-gutters>
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
       <v-text-field
         label="Link Imagem"
         v-model="produtoData.urlImagem"
         color="white"
         :disabled="inputDisable"
       ></v-text-field>
-
+      </v-col>
+      <v-col
+        cols="12"
+        sm="6"
+        md="2"
+      >
+      <v-btn
+          primary
+          class="ml-16"
+          @click="verImagem()"
+          :loading="salvarAlteraçõesLoading"
+          >previa</v-btn
+        >
+      
+      </v-col>
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+      >
+      <v-img max-width="200px" max-height="200px" class="ml-16 border border-color" :src="previaImagem"></v-img>
+      </v-col>
+      </v-row>
+      </v-container>
       <div v-if="v$.produtoData.urlImagem.$error">
         <v-alert border="bottom" color="pink darken-1" dark>
           O campo
@@ -162,6 +191,7 @@ export default {
   },
   data() {
     return {
+      previaImagem: 'https://images.assetsdelivery.com/compings_v2/yehorlisnyi/yehorlisnyi2104/yehorlisnyi210400016.jpg',
       dialogLoaging: false,
       deleteLoading: false,
       salvarAlteraçõesLoading: false,
@@ -248,6 +278,7 @@ export default {
   // },
 
   async created() {
+    this.produtoData.urlImagem;
     var Xmas = new Date().getFullYear();
     for (let i = Xmas; i >= 1900; i--) {
       this.itemsYear.push(i);
@@ -308,6 +339,11 @@ export default {
       this.$router.push({ name: "listaProdutos" });
       
      
+    },
+
+    verImagem(){
+      console.log(this.produtoData.urlImagem);
+      this.previaImagem = this.produtoData.urlImagem;
     },
 
     clean() {
