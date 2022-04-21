@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-axios.defaults.baseURL = 'https://dicofoodapi.com.br'
+axios.defaults.baseURL = 'https://api-dicofood.azurewebsites.net'
 
 
 //process.env.VUE_APP_BASE_URL
