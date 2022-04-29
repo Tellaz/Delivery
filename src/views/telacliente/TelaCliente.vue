@@ -319,8 +319,8 @@
                                     ></v-card-title>
 
                                     <v-card-subtitle class="text-h6" style="color: green;" v-text="dessertsBebidas.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })"></v-card-subtitle>
-
-                                    <div class=" d-flex justify-center">
+                                    
+                                    <div class="ml-16">
                                       <v-avatar
                                           class="ma-3"
                                           size="auto"
