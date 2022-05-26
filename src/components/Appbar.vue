@@ -150,11 +150,12 @@ export default {
       localStorage.setItem('token', "")
       window.sessionStorage.setItem('tokens', "");
       this.dialogOptions.title = "Sucesso!";
-      this.dialogOptions.message = "Voce sera redirecionado para o Login!";
+      this.dialogOptions.message = "Você será redirecionado!";
       this.dialogOptions.type = "success";
-      
       this.dialogOptions.dialog = true;
-      window.location.reload()
+      setTimeout(function(){
+                   window.location.reload() 
+                }, 3000);
       this.salvarAlteraçõesLoading = false;
       
     }

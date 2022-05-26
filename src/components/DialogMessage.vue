@@ -12,10 +12,17 @@
                 <v-divider></v-divider>
                     <div class="d-flex justify-center ">
                         <v-btn
+                            v-if="dialogOptions.botaoText !== ''"
                             class="border mb-6"
                             text
                             @click="abreModal"
                         >{{ dialogOptions.botaoText }}</v-btn>
+                        <v-progress-circular
+                            v-else
+                            :size="30"
+                            color="white"
+                            indeterminate
+                        ></v-progress-circular>
                     </div>
             </v-card>
         </v-dialog>
@@ -34,7 +41,7 @@ export default {
                         default: "Obrigatório"
                     },
                     type: "error",
-                    botaoText: "Entendido"
+                    botaoText: "Entendido",
                 }
             }
         }
