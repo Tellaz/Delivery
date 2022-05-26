@@ -13,7 +13,8 @@
           'items-per-page-text': 'compras por página:', 
           pageText: '{0}-{1} de {2}', 
         }"
-        sort-by="calories"
+        :sort-by="['id']"
+        :sort-desc="[true]"
         class="elevation-1"
       >
         <template v-slot:no-data>
