@@ -1,24 +1,8 @@
-# projectasan
+<h1 align="center">Delivery - DicoFood</h1>
 
-## Project setup
-```
-npm install
-```
+## 📚 Sobre
+Este projeto foi feito como Trabalho de Conclusão de Curso (TCC). 
+Projeto FrontEnd (Vue.JS) servindo como um cardápio virtual e realização de pedidos online.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+---
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
